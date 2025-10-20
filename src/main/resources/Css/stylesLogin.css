@@ -1,0 +1,7 @@
+.my-pane {
+        -fx-background-image: url ("src/main/resources/images/ChatGPT Image 7 sept 2025, 16_55_55.png
+");
+    -fx-background-size: cover;      /* Ajusta al tamaño del Pane */
+    -fx-background-position: center; /* Centra la imagen */
+    -fx-background-repeat: no-repeat;
+}

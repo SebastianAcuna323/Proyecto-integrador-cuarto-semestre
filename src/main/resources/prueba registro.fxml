@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="899.0" prefWidth="1500.0" style="-fx-background-color: linear-gradient(#0d4d80 0%, #0a3059 50%, #000000 100%);" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PruebaRegistroController">
+   <top>
+      <ImageView fitHeight="99.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER_RIGHT">
+         <image>
+            <Image url="@Gym-connect/src/main/resources/images/ChatGPT_Image_14_sept_2025__17_57_06-removebg-preview.png" />
+         </image>
+      </ImageView>
+   </top>
+   <center>
+      <ScrollPane fitToHeight="true" fitToWidth="true" prefWidth="912.0" stylesheets="@Gym-connect/src/main/resources/Css/styles.css" vbarPolicy="NEVER" BorderPane.alignment="CENTER">
+         <content>
+            <HBox alignment="CENTER" fillHeight="false" prefHeight="803.2" prefWidth="1498.4" style="-fx-background-color: linear-gradient(#0d4d80 0%, #0a3059 50%, #000000 100%);">
+               <children>
+                  <HBox maxHeight="600.0" maxWidth="300.0" minHeight="650.0" minWidth="1250.0" prefHeight="600.0" prefWidth="500.0" style="-fx-background-color: linear-gradient(#000000 0%, #0a3059 50%, #0d4d80 100%); -fx-background-radius: 20;">
+                     <children>
+                        <AnchorPane maxHeight="550.0" prefHeight="600.0" prefWidth="594.0" style="-fx-background-color: white; -fx-background-radius: 10;">
+                           <HBox.margin>
+                              <Insets left="45.0" top="50.0" />
+                           </HBox.margin>
+                           <children>
+                              <AnchorPane fx:id="panelLogin" prefHeight="551.0" prefWidth="586.0" style="-fx-background-color: white; -fx-background-radius: 10;">
+                                 <children>
+                                    <Label fx:id="lblCreateAccount" layoutX="155.0" layoutY="29.0" prefHeight="58.0" prefWidth="301.0" text="Create Account" textAlignment="CENTER">
+                                       <font>
+                                          <Font name="System Bold" size="40.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="txtName" layoutX="90.0" layoutY="100.0" prefHeight="32.0" prefWidth="406.0" promptText="Name" style="-fx-background-color: transparent; -fx-border-color: transparent transparent black transparent; -fx-border-width: 0 0 2 0; -fx-padding: 5 0 5 0; -fx-font-size: 14;" />
+                                    <TextField fx:id="txtLastName" layoutX="90.0" layoutY="150.0" prefHeight="32.0" prefWidth="406.0" promptText="Last Name" style="-fx-background-color: transparent; -fx-border-color: transparent transparent black transparent; -fx-border-width: 0 0 2 0; -fx-padding: 5 0 5 0; -fx-font-size: 14;" />
+                                    <TextField fx:id="txtUsername" layoutX="90.0" layoutY="200.0" prefHeight="32.0" prefWidth="406.0" promptText="Username" style="-fx-background-color: transparent; -fx-border-color: transparent transparent black transparent; -fx-border-width: 0 0 2 0; -fx-padding: 5 0 5 0; -fx-font-size: 14;" />
+                                    <TextField fx:id="txtEmail" layoutX="90.0" layoutY="250.0" prefHeight="32.0" prefWidth="406.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-color: transparent transparent black transparent; -fx-border-width: 0 0 2 0; -fx-padding: 5 0 5 0; -fx-font-size: 14;" />
+                                    <TextField fx:id="txtPassword" layoutX="90.0" layoutY="300.0" prefHeight="32.0" prefWidth="406.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: transparent transparent black transparent; -fx-border-width: 0 0 2 0; -fx-padding: 5 0 5 0; -fx-font-size: 14;" />
+                                    <TextField fx:id="txtConfirmPassword" layoutX="90.0" layoutY="350.0" prefHeight="32.0" prefWidth="406.0" promptText="Confirm Password" style="-fx-background-color: transparent; -fx-border-color: transparent transparent black transparent; -fx-border-width: 0 0 2 0; -fx-padding: 5 0 5 0; -fx-font-size: 14;" />
+                                    <JFXButton fx:id="buttonSignUp" layoutX="293.0" layoutY="413.0" onAction="#botonRegistrarse" prefHeight="60.0" prefWidth="196.0" style="-fx-background-color: #262626; -fx-background-radius: 30;" text="Sign Up" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </JFXButton>
+                                    <JFXButton fx:id="buttonClear" layoutX="101.0" layoutY="413.0" onAction="#botonLimpiar" prefHeight="60.0" prefWidth="153.0" style="-fx-background-color: #262626; -fx-background-radius: 30;" text="Clear" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </JFXButton>
+                                    <JFXButton fx:id="buttonBack" layoutX="13.0" layoutY="14.0" onAction="#botonFlechaVolver" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: #262626; -fx-background-radius: 60;" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="2.0" />
+                                       </font>
+                                    </JFXButton>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </AnchorPane>
+                        <ImageView fitHeight="561.0" fitWidth="597.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@Gym-connect/src/main/resources/images/ChatGPT_Image_14_sept_2025__17_57_06-removebg-preview.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets top="40.0" />
+                           </HBox.margin>
+                        </ImageView>
+                     </children>
+                     <padding>
+                        <Insets left="15.0" right="45.0" />
+                     </padding>
+                  </HBox>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets bottom="80.0" />
+               </padding>
+            </HBox>
+         </content>
+      </ScrollPane>
+   </center>
+</BorderPane>

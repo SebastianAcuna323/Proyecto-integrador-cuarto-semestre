@@ -1,0 +1,89 @@
+/* ================================
+   ESTILOS GENERALES DE TABLA
+   ================================ */
+.table-view {
+    -fx-background-color: white;
+    -fx-border-color: #dcdcdc;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 5;
+    -fx-table-cell-border-color: transparent;
+}
+
+/* ================================
+   CABECERA (COLUMNAS)
+   ================================ */
+.table-view .column-header-background {
+    -fx-background-color: linear-gradient(to bottom, #000000, #0a3059, #0d4d80 ); /* azul degradado */
+    -fx-background-radius: 8 8 0 0;
+    -fx-padding: 8;
+}
+
+
+.table-view .column-header, .table-view .filler {
+    -fx-size: 35px;
+    -fx-border-width: 0;
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-alignment: CENTER;
+}
+
+/* ================================
+   FILAS
+   ================================ */
+.table-row-cell {
+    -fx-background-color: white;
+    -fx-border-color: transparent;
+    -fx-padding: 4 0 4 0;
+    -fx-font-size: 13px;
+}
+
+/* Alternar colores de filas */
+.table-row-cell:odd {
+    -fx-background-color: #f9f9f9;
+}
+.table-row-cell:even {
+    -fx-background-color: white;
+}
+
+/* Hover en la fila */
+.table-row-cell:hover {
+    -fx-background-color: #e6f7ff;
+}
+
+/* Fila seleccionada */
+.table-row-cell:selected {
+    -fx-background-color: #00aaff;
+    -fx-text-fill: white;
+}
+
+/* ================================
+   CELDAS
+   ================================ */
+.table-cell {
+    -fx-alignment: CENTER-LEFT;
+    -fx-padding: 6 8 6 8;
+    -fx-text-fill: #333;
+    -fx-font-size: 13px;
+}
+
+/* ================================
+   SCROLLBAR
+   ================================ */
+.scroll-bar:horizontal, .scroll-bar:vertical {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: #b3e5fc;
+    -fx-background-radius: 5;
+}
+
+.scroll-bar .thumb:hover {
+    -fx-background-color: #81d4fa;
+}
