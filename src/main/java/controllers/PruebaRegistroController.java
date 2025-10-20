@@ -36,6 +36,9 @@ public class PruebaRegistroController {
     private TextField txtLastName;
 
     @FXML
+    private TextField txtDocumentNumber;
+
+    @FXML
     private TextField txtName;
 
     @FXML
