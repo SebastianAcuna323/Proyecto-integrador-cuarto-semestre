@@ -77,6 +77,8 @@ public class RegistroController {
     @FXML
     void botonRegistrarse(ActionEvent event) {
 
+
+
     }
 
 

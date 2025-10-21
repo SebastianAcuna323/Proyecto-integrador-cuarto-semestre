@@ -1,36 +1,46 @@
 package model;
 
-import java.io.FileInputStream;
-import java.io.IOException;
+
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.Properties;
 
 
 public class ConexionDatabase {
     private static Connection conn = null;
 
+    // Metodo principal de la conextio de la base de datos
     public static Connection getConnection() {
-        if (conn != null) return conn;
+        try {
+            if (conn == null || conn.isClosed()) {
+                Properties props = new Properties();
 
-        Properties props = new Properties();
-        try (FileInputStream fis = new FileInputStream("config.properties")) {
-            props.load(fis);
+                try (InputStream input = ConexionDatabase.class.getClassLoader().getResourceAsStream("config.properties")) {
+                    if (input == null) {
+                        System.out.println("No se encontró el archivo config.properties en resources/");
+                        return null;
+                    }
 
-            String url = props.getProperty("URL");
-            String user = props.getProperty("USER");
-            String password = props.getProperty("PASSWORD");
+                    props.load(input);
 
-            conn = DriverManager.getConnection(url, user, password);
-            System.out.println("Conexión exitosa a la base de datos.");
+                    String url = props.getProperty("URL");
+                    String user = props.getProperty("USERNAME");
+                    String password = props.getProperty("PASSWORD");
 
-        } catch (IOException e) {
-            System.out.println("⚠ Error al leer el archivo config.properties: " + e.getMessage());
-        } catch (SQLException e) {
-            System.out.println(" Error de conexión a la base de datos: " + e.getMessage());
+                    if (url == null || user == null || password == null) {
+                        System.out.println("Faltan propiedades en config.properties (URL, USER o PASSWORD)");
+                        return null;
+                    }
+
+                    conn = DriverManager.getConnection(url, user, password);
+                    System.out.println("Conexión establecida con la base de datos.");
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error al conectar con la base de datos: " + e.getMessage());
+            e.printStackTrace();
         }
-
         return conn;
     }
 }

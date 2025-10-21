@@ -43,7 +43,7 @@ public class PruebaLoginController {
     private TextField txtUsername;
 
     @FXML
-    void cambiarAregistro(ActionEvent event) {app.App.setScene(paths.SCENEREGISTER, true, app.AnimationDirection.LEFT);
+    void cambiarAregistro(ActionEvent event) {app.App.setScene(paths.SCENEPRUEBAREGISTRO, true, app.AnimationDirection.LEFT);
     }
 
 }
