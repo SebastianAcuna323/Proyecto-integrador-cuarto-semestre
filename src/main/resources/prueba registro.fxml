@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="899.0" prefWidth="1500.0" style="-fx-background-color: linear-gradient(#0d4d80 0%, #0a3059 50%, #000000 100%);" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PruebaRegistroController">
+<BorderPane prefHeight="899.0" prefWidth="1500.0" style="-fx-background-color: linear-gradient(#0d4d80 0%, #0a3059 50%, #000000 100%);" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.RegistroController">
    <top>
       <ImageView fitHeight="99.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER_RIGHT">
          <image>

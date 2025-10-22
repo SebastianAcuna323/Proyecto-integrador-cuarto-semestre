@@ -23,7 +23,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdministradorController">
    <left>
       <VBox prefHeight="200.0" prefWidth="400.0" style="-fx-background-color: linear-gradient(#000000 0%, #0a3059 50%, #0d4d80 100%);" BorderPane.alignment="CENTER">
          <children>
@@ -44,7 +44,7 @@
                   </Label>
                </children>
             </HBox>
-            <JFXToggleNode prefHeight="58.0" prefWidth="288.0" style="-fx-background-color: transparent;" text="DASHBOARD" textFill="WHITE">
+            <JFXToggleNode fx:id="botonDashboard" onAction="#mostrarDashboard" prefHeight="58.0" prefWidth="288.0" style="-fx-background-color: transparent;" text="DASHBOARD" textFill="WHITE">
                <selectedColor>
                   <Color red="0.557894766330719" green="0.5454970598220825" blue="0.5454970598220825" opacity="0.20000000298023224" />
                </selectedColor>
@@ -58,7 +58,7 @@
                   <ToggleGroup fx:id="menuDash" />
                </toggleGroup>
             </JFXToggleNode>
-            <JFXToggleNode prefHeight="58.0" prefWidth="288.0" style="-fx-background-color: transparent;" text="USUARIOS" textFill="WHITE" toggleGroup="$menuDash">
+            <JFXToggleNode fx:id="botonUsuario" onAction="#mostrarUsuario" prefHeight="58.0" prefWidth="288.0" style="-fx-background-color: transparent;" text="USUARIOS" textFill="WHITE" toggleGroup="$menuDash">
                <selectedColor>
                   <Color red="0.557894766330719" green="0.5454970598220825" blue="0.5454970598220825" opacity="0.20000000298023224" />
                </selectedColor>
@@ -69,7 +69,7 @@
                   <Insets left="55.0" top="40.0" />
                </VBox.margin>
             </JFXToggleNode>
-            <JFXToggleNode prefHeight="58.0" prefWidth="288.0" style="-fx-background-color: transparent;" text="PLANES" textFill="WHITE" toggleGroup="$menuDash">
+            <JFXToggleNode fx:id="botonPlanes" onAction="#mostrarPlanes" prefHeight="58.0" prefWidth="288.0" style="-fx-background-color: transparent;" text="PLANES" textFill="WHITE" toggleGroup="$menuDash">
                <selectedColor>
                   <Color red="0.557894766330719" green="0.5454970598220825" blue="0.5454970598220825" opacity="0.20000000298023224" />
                </selectedColor>
@@ -195,7 +195,7 @@
                                  <graphic>
                                     <ImageView fitHeight="29.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@Gym-connect/src/main/resources/images/pencil.png" />
+                                          <Image url="@images/pencil.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
@@ -207,13 +207,31 @@
                                  <graphic>
                                     <ImageView fitHeight="29.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@Gym-connect/src/main/resources/images/trash-bin.png" />
+                                          <Image url="@images/trash-bin.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
                                  <HBox.margin>
                                     <Insets left="30.0" top="18.0" />
                                  </HBox.margin>
+                              </JFXButton>
+                              <JFXButton prefHeight="37.0" prefWidth="216.0" style="-fx-background-color: #d8dbe0; -fx-background-radius: 20;" text="Buscar" textFill="#73777d">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="29.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@images/magnifying-glass.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <HBox.margin>
+                                    <Insets left="30.0" top="18.0" />
+                                 </HBox.margin>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
                               </JFXButton>
                            </children>
                         </HBox>
@@ -278,7 +296,7 @@
                                  <graphic>
                                     <ImageView fitHeight="29.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@Gym-connect/src/main/resources/images/pencil.png" />
+                                          <Image url="@images/pencil.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
@@ -290,7 +308,7 @@
                                  <graphic>
                                     <ImageView fitHeight="29.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@Gym-connect/src/main/resources/images/trash-bin.png" />
+                                          <Image url="@images/trash-bin.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
