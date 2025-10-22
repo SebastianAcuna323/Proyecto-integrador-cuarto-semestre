@@ -76,7 +76,7 @@ public class PruebaRegistroController {
         String confirmar = txtConfirmPassword.getText();
         String cedula = txtDocumentNumber.getText();
 
-        // Validaciones básicas
+        // Validaciones de campos vacio y contraseñas que no coinciden
         if (nombre.isEmpty() || apellido.isEmpty() || correo.isEmpty() ||
                 contrasena.isEmpty() || confirmar.isEmpty() || cedula.isEmpty()) {
             mostrarAlerta("Campos vacíos", "Todos los campos son obligatorios.", Alert.AlertType.WARNING);
@@ -106,8 +106,6 @@ public class PruebaRegistroController {
         alerta.setContentText(mensaje);
         alerta.showAndWait();
     }
-
-
 }
 
 

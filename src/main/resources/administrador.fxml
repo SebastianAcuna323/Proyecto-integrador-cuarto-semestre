@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXToggleNode?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <left>
+      <VBox prefHeight="200.0" prefWidth="400.0" style="-fx-background-color: linear-gradient(#000000 0%, #0a3059 50%, #0d4d80 100%);" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="0.0" prefWidth="400.0">
+               <children>
+                  <ImageView fitHeight="73.0" fitWidth="93.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/ChatGPT_Image_14_sept_2025__17_57_06-removebg-preview.png" />
+                     </image>
+                  </ImageView>
+                  <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" text="GymConnect" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                     <padding>
+                        <Insets top="22.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+            <JFXToggleNode prefHeight="58.0" prefWidth="288.0" style="-fx-background-color: transparent;" text="DASHBOARD" textFill="WHITE">
+               <selectedColor>
+                  <Color red="0.557894766330719" green="0.5454970598220825" blue="0.5454970598220825" opacity="0.20000000298023224" />
+               </selectedColor>
+               <VBox.margin>
+                  <Insets left="55.0" top="65.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="23.0" />
+               </font>
+               <toggleGroup>
+                  <ToggleGroup fx:id="menuDash" />
+               </toggleGroup>
+            </JFXToggleNode>
+            <JFXToggleNode prefHeight="58.0" prefWidth="288.0" style="-fx-background-color: transparent;" text="USUARIOS" textFill="WHITE" toggleGroup="$menuDash">
+               <selectedColor>
+                  <Color red="0.557894766330719" green="0.5454970598220825" blue="0.5454970598220825" opacity="0.20000000298023224" />
+               </selectedColor>
+               <font>
+                  <Font name="System Bold" size="23.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="55.0" top="40.0" />
+               </VBox.margin>
+            </JFXToggleNode>
+            <JFXToggleNode prefHeight="58.0" prefWidth="288.0" style="-fx-background-color: transparent;" text="PLANES" textFill="WHITE" toggleGroup="$menuDash">
+               <selectedColor>
+                  <Color red="0.557894766330719" green="0.5454970598220825" blue="0.5454970598220825" opacity="0.20000000298023224" />
+               </selectedColor>
+               <font>
+                  <Font name="System Bold" size="23.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="55.0" top="40.0" />
+               </VBox.margin>
+            </JFXToggleNode>
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane fx:id="panelDashboard" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <VBox layoutX="6.0" layoutY="7.0" prefHeight="988.0" prefWidth="1193.0" spacing="20.0" style="-fx-background-color: #f4f6f9;">
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                     <children>
+                        <HBox prefHeight="14.0" prefWidth="1154.0">
+                           <children>
+                              <Label style="-fx-background-color: transparent;" text="Resumen General">
+                                 <font>
+                                    <Font name="System Bold" size="22.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="262.0" prefWidth="1154.0">
+                           <children>
+                              <AnchorPane prefHeight="259.0" prefWidth="350.0" style="-fx-background-color: white; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 3); -fx-padding: 15;" />
+                              <AnchorPane prefHeight="259.0" prefWidth="350.0" style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 3);">
+                                 <HBox.margin>
+                                    <Insets left="20.0" />
+                                 </HBox.margin>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="259.0" prefWidth="350.0" style="-fx-background-color: white; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 3); -fx-padding: 15;">
+                                 <HBox.margin>
+                                    <Insets left="20.0" />
+                                 </HBox.margin>
+                              </AnchorPane>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="15.0" prefWidth="1154.0">
+                           <children>
+                              <Label text="Estadísticas del gimnasio">
+                                 <font>
+                                    <Font name="System Bold" size="22.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="298.0" prefWidth="1154.0">
+                           <children>
+                              <BarChart prefHeight="234.0" prefWidth="449.0" style="-fx-background-color: transparent;">
+                                <xAxis>
+                                  <CategoryAxis side="BOTTOM" />
+                                </xAxis>
+                                <yAxis>
+                                  <NumberAxis side="LEFT" />
+                                </yAxis>
+                                 <HBox.margin>
+                                    <Insets left="20.0" />
+                                 </HBox.margin>
+                              </BarChart>
+                              <LineChart prefHeight="234.0" prefWidth="468.0" style="-fx-background-color: transparent;">
+                                <xAxis>
+                                  <CategoryAxis side="BOTTOM" />
+                                </xAxis>
+                                <yAxis>
+                                  <NumberAxis side="LEFT" />
+                                </yAxis>
+                                 <HBox.margin>
+                                    <Insets left="50.0" />
+                                 </HBox.margin>
+                              </LineChart>
+                              <PieChart style="-fx-background-color: transparent; -fx-border-color: transparent;">
+                                 <HBox.margin>
+                                    <Insets left="50.0" />
+                                 </HBox.margin>
+                              </PieChart>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children></AnchorPane>
+            <AnchorPane fx:id="panelUsuarios" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: linear-gradient(#000000 0%, #0a3059 50%, #0d4d80 100%);" visible="false">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-radius: 20; -fx-background-color: white;" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                     <children>
+                        <Label text="Usuarios">
+                           <font>
+                              <Font name="System Bold" size="46.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="40.0" />
+                           </VBox.margin>
+                           <padding>
+                              <Insets left="30.0" />
+                           </padding>
+                        </Label>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <JFXButton prefHeight="58.0" prefWidth="290.0" style="-fx-background-color: linear-gradient(#000000 0%, #0a3059 50%, #0d4d80 100%); -fx-background-radius: 20;" text="+ Añadir usuario" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="45.0" top="18.0" />
+                                 </HBox.margin>
+                              </JFXButton>
+                              <JFXButton prefHeight="58.0" prefWidth="216.0" style="-fx-background-color: #d8dbe0; -fx-background-radius: 20;" text="Editar" textFill="#73777d">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="30.0" top="18.0" />
+                                 </HBox.margin>
+                                 <graphic>
+                                    <ImageView fitHeight="29.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Gym-connect/src/main/resources/images/pencil.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                              <JFXButton prefHeight="58.0" prefWidth="216.0" style="-fx-background-color: #d8dbe0; -fx-background-radius: 20;" text="Eliminar" textFill="#73777d">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="29.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Gym-connect/src/main/resources/images/trash-bin.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <HBox.margin>
+                                    <Insets left="30.0" top="18.0" />
+                                 </HBox.margin>
+                              </JFXButton>
+                           </children>
+                        </HBox>
+                        <TextField prefHeight="42.0" prefWidth="980.0" promptText="Buscar" style="-fx-background-color: white; -fx-background-radius: 6; -fx-border-radius: 6; -fx-border-color: #dcdfe6; -fx-border-width: 1; -fx-padding: 6 10 6 10;">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="40.0" right="40.0" top="10.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <TableView prefHeight="649.0" prefWidth="1050.0" stylesheets="@Gym-connect/src/main/resources/Css/styleTable.css" visible="false">
+                          <columns>
+                            <TableColumn prefWidth="136.800048828125" text="Nombre" />
+                            <TableColumn prefWidth="100.79998779296875" text="Usuario" />
+                              <TableColumn minWidth="0.0" prefWidth="104.0" text="Rol" />
+                              <TableColumn prefWidth="112.7999267578125" text="Estado" />
+                              <TableColumn prefWidth="210.40005493164062" text="Plan" />
+                              <TableColumn prefWidth="191.2000732421875" text="Fecha de ingreso" />
+                              <TableColumn prefWidth="184.800048828125" text="Fecha de vencimiento" />
+                          </columns>
+                           <VBox.margin>
+                              <Insets bottom="200.0" left="30.0" right="80.0" top="45.0" />
+                           </VBox.margin>
+                        </TableView>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="panelPlanes" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: linear-gradient(#000000 0%, #0a3059 50%, #0d4d80 100%);" visible="false">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-radius: 20; -fx-background-color: white;" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                     <children>
+                        <Label text="Planes de entrenamiento">
+                           <font>
+                              <Font name="System Bold" size="46.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="40.0" />
+                           </VBox.margin>
+                           <padding>
+                              <Insets left="30.0" />
+                           </padding>
+                        </Label>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <JFXButton prefHeight="58.0" prefWidth="290.0" style="-fx-background-color: linear-gradient(#000000 0%, #0a3059 50%, #0d4d80 100%); -fx-background-radius: 20;" text="+ Crear plan" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="45.0" top="18.0" />
+                                 </HBox.margin>
+                              </JFXButton>
+                              <JFXButton prefHeight="58.0" prefWidth="216.0" style="-fx-background-color: #d8dbe0; -fx-background-radius: 20;" text="Editar" textFill="#73777d">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="30.0" top="18.0" />
+                                 </HBox.margin>
+                                 <graphic>
+                                    <ImageView fitHeight="29.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Gym-connect/src/main/resources/images/pencil.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                              <JFXButton prefHeight="58.0" prefWidth="216.0" style="-fx-background-color: #d8dbe0; -fx-background-radius: 20;" text="Eliminar" textFill="#73777d">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="29.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Gym-connect/src/main/resources/images/trash-bin.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <HBox.margin>
+                                    <Insets left="30.0" top="18.0" />
+                                 </HBox.margin>
+                              </JFXButton>
+                           </children>
+                        </HBox>
+                        <TextField prefHeight="42.0" prefWidth="980.0" promptText="Buscar" style="-fx-background-color: white; -fx-background-radius: 6; -fx-border-radius: 6; -fx-border-color: #dcdfe6; -fx-border-width: 1; -fx-padding: 6 10 6 10;">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="40.0" right="40.0" top="10.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <TableView prefHeight="649.0" prefWidth="1060.0" stylesheets="@Gym-connect/src/main/resources/Css/styleTable.css">
+                           <columns>
+                              <TableColumn prefWidth="136.800048828125" text="Nombre" />
+                              <TableColumn prefWidth="100.79998779296875" text="Duración" />
+                              <TableColumn minWidth="0.0" prefWidth="104.0" text="Precio" />
+                              <TableColumn prefWidth="112.7999267578125" text="Nivel" />
+                           </columns>
+                           <VBox.margin>
+                              <Insets bottom="200.0" left="30.0" right="80.0" top="45.0" />
+                           </VBox.margin>
+                        </TableView>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+         </children>
+      </StackPane>
+   </center>
+</BorderPane>
