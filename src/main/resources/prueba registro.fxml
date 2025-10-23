@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
@@ -34,23 +35,23 @@
                            <children>
                               <AnchorPane fx:id="panelLogin" prefHeight="551.0" prefWidth="586.0" style="-fx-background-color: white; -fx-background-radius: 10;">
                                  <children>
-                                    <Label fx:id="lblCreateAccount" layoutX="155.0" layoutY="29.0" prefHeight="58.0" prefWidth="301.0" text="Create Account" textAlignment="CENTER">
+                                    <Label fx:id="lblCreateAccount" layoutX="135.0" layoutY="10.0" prefHeight="58.0" prefWidth="338.0" text="Register new user" textAlignment="CENTER">
                                        <font>
                                           <Font name="System Bold" size="40.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="txtName" layoutX="90.0" layoutY="100.0" prefHeight="32.0" prefWidth="406.0" promptText="Name" style="-fx-background-color: transparent; -fx-border-color: transparent transparent black transparent; -fx-border-width: 0 0 2 0; -fx-padding: 5 0 5 0; -fx-font-size: 14;" />
-                                    <TextField fx:id="txtLastName" layoutX="90.0" layoutY="150.0" prefHeight="32.0" prefWidth="406.0" promptText="Last Name" style="-fx-background-color: transparent; -fx-border-color: transparent transparent black transparent; -fx-border-width: 0 0 2 0; -fx-padding: 5 0 5 0; -fx-font-size: 14;" />
-                                    <TextField fx:id="txtUsername" layoutX="90.0" layoutY="250.0" prefHeight="32.0" prefWidth="406.0" promptText="Username" style="-fx-background-color: transparent; -fx-border-color: transparent transparent black transparent; -fx-border-width: 0 0 2 0; -fx-padding: 5 0 5 0; -fx-font-size: 14;" />
-                                    <TextField fx:id="txtEmail" layoutX="90.0" layoutY="300.0" prefHeight="32.0" prefWidth="406.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-color: transparent transparent black transparent; -fx-border-width: 0 0 2 0; -fx-padding: 5 0 5 0; -fx-font-size: 14;" />
-                                    <TextField fx:id="txtPassword" layoutX="90.0" layoutY="350.0" prefHeight="32.0" prefWidth="406.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: transparent transparent black transparent; -fx-border-width: 0 0 2 0; -fx-padding: 5 0 5 0; -fx-font-size: 14;" />
-                                    <TextField fx:id="txtConfirmPassword" layoutX="90.0" layoutY="400.0" prefHeight="32.0" prefWidth="406.0" promptText="Confirm Password" style="-fx-background-color: transparent; -fx-border-color: transparent transparent black transparent; -fx-border-width: 0 0 2 0; -fx-padding: 5 0 5 0; -fx-font-size: 14;" />
-                                    <JFXButton fx:id="buttonSignUp" layoutX="293.0" layoutY="461.0" onAction="#botonRegistrarse" prefHeight="60.0" prefWidth="196.0" style="-fx-background-color: #262626; -fx-background-radius: 30;" text="Sign Up" textFill="WHITE">
+                                    <TextField fx:id="txtName" layoutX="101.0" layoutY="74.0" prefHeight="32.0" prefWidth="406.0" promptText="Name" style="-fx-background-color: transparent; -fx-border-color: transparent transparent black transparent; -fx-border-width: 0 0 2 0; -fx-padding: 5 0 5 0; -fx-font-size: 14;" />
+                                    <TextField fx:id="txtLastName" layoutX="101.0" layoutY="124.0" prefHeight="32.0" prefWidth="406.0" promptText="Last Name" style="-fx-background-color: transparent; -fx-border-color: transparent transparent black transparent; -fx-border-width: 0 0 2 0; -fx-padding: 5 0 5 0; -fx-font-size: 14;" />
+                                    <TextField fx:id="txtDocumentNumber" layoutX="101.0" layoutY="174.0" prefHeight="32.0" prefWidth="406.0" promptText="Document Number" style="-fx-background-color: transparent; -fx-border-color: transparent transparent black transparent; -fx-border-width: 0 0 2 0; -fx-padding: 5 0 5 0; -fx-font-size: 14;" />
+                                    <TextField fx:id="txtEmail" layoutX="101.0" layoutY="324.0" prefHeight="32.0" prefWidth="406.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-color: transparent transparent black transparent; -fx-border-width: 0 0 2 0; -fx-padding: 5 0 5 0; -fx-font-size: 14;" />
+                                    <TextField fx:id="txtPassword" layoutX="101.0" layoutY="374.0" prefHeight="32.0" prefWidth="406.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: transparent transparent black transparent; -fx-border-width: 0 0 2 0; -fx-padding: 5 0 5 0; -fx-font-size: 14;" />
+                                    <TextField fx:id="txtConfirmPassword" layoutX="101.0" layoutY="424.0" prefHeight="32.0" prefWidth="406.0" promptText="Confirm Password" style="-fx-background-color: transparent; -fx-border-color: transparent transparent black transparent; -fx-border-width: 0 0 2 0; -fx-padding: 5 0 5 0; -fx-font-size: 14;" />
+                                    <JFXButton fx:id="buttonSignUp" layoutX="293.0" layoutY="481.0" onAction="#botonRegistrar" prefHeight="60.0" prefWidth="196.0" style="-fx-background-color: #262626; -fx-background-radius: 30;" text="Sign Up" textFill="WHITE">
                                        <font>
                                           <Font name="System Bold" size="18.0" />
                                        </font>
                                     </JFXButton>
-                                    <JFXButton fx:id="buttonClear" layoutX="101.0" layoutY="461.0" onAction="#botonLimpiar" prefHeight="60.0" prefWidth="153.0" style="-fx-background-color: #262626; -fx-background-radius: 30;" text="Clear" textFill="WHITE">
+                                    <JFXButton fx:id="buttonClear" layoutX="101.0" layoutY="481.0" onAction="#botonLimpiar" prefHeight="60.0" prefWidth="153.0" style="-fx-background-color: #262626; -fx-background-radius: 30;" text="Clear" textFill="WHITE">
                                        <font>
                                           <Font name="System Bold" size="18.0" />
                                        </font>
@@ -60,7 +61,8 @@
                                           <Font name="System Bold" size="2.0" />
                                        </font>
                                     </JFXButton>
-                                    <TextField fx:id="txtDocumentNumber" layoutX="90.0" layoutY="200.0" prefHeight="32.0" prefWidth="406.0" promptText="Document Number" style="-fx-background-color: transparent; -fx-border-color: transparent transparent black transparent; -fx-border-width: 0 0 2 0; -fx-padding: 5 0 5 0; -fx-font-size: 14;" />
+                                    <JFXComboBox fx:id="ComboRol" layoutX="101.0" layoutY="224.0" prefWidth="406.0" promptText="Rol" style="-fx-border-width: 0 0 2 0; -fx-padding: 5 0 5 0; -fx-background-color: transparent; -fx-border-color: transparent;" />
+                                    <JFXComboBox fx:id="ComboEstado" layoutX="101.0" layoutY="274.0" prefWidth="406.0" promptText="Estado" style="-fx-padding: 5 0 5 0;" />
                                  </children>
                               </AnchorPane>
                            </children>

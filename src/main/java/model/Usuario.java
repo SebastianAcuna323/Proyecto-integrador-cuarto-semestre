@@ -7,6 +7,7 @@ import java.sql.SQLException;
 //Atributos del usuario
 
 public class Usuario {
+    private int id_usuario;
     private String nombre;
     private String apellido;
     private String correo;
@@ -14,7 +15,11 @@ public class Usuario {
     private String cedula;
     private int idRol;
     private int idEstado;
+    private String nombreRol;
+    private String nombreEstado;
 
+
+    public Usuario() {}
 
     // Constructor con datos del registro
     public Usuario(String nombre, String apellido, String correo, String contrasena, String cedula) {
@@ -25,6 +30,86 @@ public class Usuario {
         this.cedula = cedula;
         this.idRol = 3;    // Rol por defecto: cliente
         this.idEstado = 1; // Estado por defecto: activo
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
+    }
+
+    public String getCedula() {
+        return cedula;
+    }
+
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
+    }
+
+    public int getIdRol() {
+        return idRol;
+    }
+
+    public void setIdRol(int idRol) {
+        this.idRol = idRol;
+    }
+
+    public int getIdEstado() {
+        return idEstado;
+    }
+
+    public void setIdEstado(int idEstado) {
+        this.idEstado = idEstado;
+    }
+
+    public int getId_usuario() {
+        return id_usuario;
+    }
+
+    public void setId_usuario(int id_usuario) {
+        this.id_usuario = id_usuario;
+    }
+
+    public String getNombreRol() {
+        return nombreRol;
+    }
+
+    public void setNombreRol(String nombreRol) {
+        this.nombreRol = nombreRol;
+    }
+
+    public String getNombreEstado() {
+        return nombreEstado;
+    }
+
+    public void setNombreEstado(String nombreEstado) {
+        this.nombreEstado = nombreEstado;
     }
 
     // Metodo para registrar un nuevo usuario

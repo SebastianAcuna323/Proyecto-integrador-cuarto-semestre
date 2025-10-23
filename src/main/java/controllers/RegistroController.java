@@ -96,6 +96,8 @@ public class RegistroController {
         } else {
             mostrarAlerta("Error de registro", resultado, Alert.AlertType.ERROR);
         }
+
+        app.App.setScene(paths.SCENEPRUEBALOGIN, true, app.AnimationDirection.UP);
     }
 
     //Metodo alertas

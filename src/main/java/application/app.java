@@ -37,8 +37,6 @@ public class app extends Application {
         stageWindow.show();
         stageWindow.setFullScreen(false);
 
-        //setScene(paths.SCENEPRUEBALOGIN, false, AnimationDirection.LEFT); // o false, según dirección de animación inicial
-
     }
 
     public enum AnimationDirection {

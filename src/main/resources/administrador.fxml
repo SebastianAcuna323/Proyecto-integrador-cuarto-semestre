@@ -177,7 +177,7 @@
                         </Label>
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <JFXButton prefHeight="58.0" prefWidth="290.0" style="-fx-background-color: linear-gradient(#000000 0%, #0a3059 50%, #0d4d80 100%); -fx-background-radius: 20;" text="+ Añadir usuario" textFill="WHITE">
+                              <JFXButton fx:id="botonAñadirUsuarios" onAction="#añadirUsuario" prefHeight="58.0" prefWidth="290.0" style="-fx-background-color: linear-gradient(#000000 0%, #0a3059 50%, #0d4d80 100%); -fx-background-radius: 20;" text="+ Añadir usuario" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="20.0" />
                                  </font>
@@ -185,7 +185,7 @@
                                     <Insets left="45.0" top="18.0" />
                                  </HBox.margin>
                               </JFXButton>
-                              <JFXButton prefHeight="58.0" prefWidth="216.0" style="-fx-background-color: #d8dbe0; -fx-background-radius: 20;" text="Editar" textFill="#73777d">
+                              <JFXButton fx:id="botonEditar" onAction="#editarUsuario" prefHeight="58.0" prefWidth="216.0" style="-fx-background-color: #d8dbe0; -fx-background-radius: 20;" text="Editar" textFill="#73777d">
                                  <font>
                                     <Font name="System Bold" size="20.0" />
                                  </font>
@@ -200,7 +200,7 @@
                                     </ImageView>
                                  </graphic>
                               </JFXButton>
-                              <JFXButton prefHeight="58.0" prefWidth="216.0" style="-fx-background-color: #d8dbe0; -fx-background-radius: 20;" text="Eliminar" textFill="#73777d">
+                              <JFXButton fx:id="botonEliminar" onAction="#eliminarUsuario" prefHeight="58.0" prefWidth="216.0" style="-fx-background-color: #d8dbe0; -fx-background-radius: 20;" text="Eliminar" textFill="#73777d">
                                  <font>
                                     <Font name="System Bold" size="20.0" />
                                  </font>
@@ -215,7 +215,7 @@
                                     <Insets left="30.0" top="18.0" />
                                  </HBox.margin>
                               </JFXButton>
-                              <JFXButton prefHeight="37.0" prefWidth="216.0" style="-fx-background-color: #d8dbe0; -fx-background-radius: 20;" text="Buscar" textFill="#73777d">
+                              <JFXButton fx:id="botonBuscar" onAction="#buscarUsuario" prefHeight="60.0" prefWidth="216.0" style="-fx-background-color: #d8dbe0; -fx-background-radius: 20;" text="Buscar" textFill="#73777d">
                                  <font>
                                     <Font name="System Bold" size="20.0" />
                                  </font>
@@ -243,18 +243,18 @@
                               <Insets left="40.0" right="40.0" top="10.0" />
                            </VBox.margin>
                         </TextField>
-                        <TableView prefHeight="649.0" prefWidth="1050.0" stylesheets="@Gym-connect/src/main/resources/Css/styleTable.css" visible="false">
+                        <TableView fx:id="tablaUsuarios" prefHeight="570.0" prefWidth="1070.0">
                           <columns>
-                            <TableColumn prefWidth="136.800048828125" text="Nombre" />
-                            <TableColumn prefWidth="100.79998779296875" text="Usuario" />
-                              <TableColumn minWidth="0.0" prefWidth="104.0" text="Rol" />
-                              <TableColumn prefWidth="112.7999267578125" text="Estado" />
-                              <TableColumn prefWidth="210.40005493164062" text="Plan" />
-                              <TableColumn prefWidth="191.2000732421875" text="Fecha de ingreso" />
-                              <TableColumn prefWidth="184.800048828125" text="Fecha de vencimiento" />
+                              <TableColumn fx:id="colId" prefWidth="87.20001065731049" text="Id" />
+                              <TableColumn fx:id="colNombre" prefWidth="123.99994659423828" text="Nombre" />
+                              <TableColumn fx:id="colApellido" prefWidth="120.79998779296875" text="Apellido" />
+                              <TableColumn fx:id="colCorreo" prefWidth="128.800048828125" text="Correo" />
+                              <TableColumn fx:id="colCedula" prefWidth="144.80001831054688" text="Cedula" />
+                              <TableColumn fx:id="colRol" prefWidth="129.5999755859375" text="Rol" />
+                              <TableColumn fx:id="colEstado" prefWidth="156.0001220703125" text="Estado" />
                           </columns>
                            <VBox.margin>
-                              <Insets bottom="200.0" left="30.0" right="80.0" top="45.0" />
+                              <Insets bottom="300.0" left="30.0" right="70.0" top="30.0" />
                            </VBox.margin>
                         </TableView>
                      </children>
@@ -278,7 +278,7 @@
                         </Label>
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <JFXButton prefHeight="58.0" prefWidth="290.0" style="-fx-background-color: linear-gradient(#000000 0%, #0a3059 50%, #0d4d80 100%); -fx-background-radius: 20;" text="+ Crear plan" textFill="WHITE">
+                              <JFXButton fx:id="botonCrear" onAction="#crearPlan" prefHeight="58.0" prefWidth="290.0" style="-fx-background-color: linear-gradient(#000000 0%, #0a3059 50%, #0d4d80 100%); -fx-background-radius: 20;" text="+ Crear plan" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="20.0" />
                                  </font>
@@ -286,7 +286,7 @@
                                     <Insets left="45.0" top="18.0" />
                                  </HBox.margin>
                               </JFXButton>
-                              <JFXButton prefHeight="58.0" prefWidth="216.0" style="-fx-background-color: #d8dbe0; -fx-background-radius: 20;" text="Editar" textFill="#73777d">
+                              <JFXButton fx:id="botonEditarPlan" onAction="#editarPlan" prefHeight="58.0" prefWidth="216.0" style="-fx-background-color: #d8dbe0; -fx-background-radius: 20;" text="Editar" textFill="#73777d">
                                  <font>
                                     <Font name="System Bold" size="20.0" />
                                  </font>
@@ -301,7 +301,7 @@
                                     </ImageView>
                                  </graphic>
                               </JFXButton>
-                              <JFXButton prefHeight="58.0" prefWidth="216.0" style="-fx-background-color: #d8dbe0; -fx-background-radius: 20;" text="Eliminar" textFill="#73777d">
+                              <JFXButton fx:id="botonEliminar" onAction="#eliminarPlan" prefHeight="58.0" prefWidth="216.0" style="-fx-background-color: #d8dbe0; -fx-background-radius: 20;" text="Eliminar" textFill="#73777d">
                                  <font>
                                     <Font name="System Bold" size="20.0" />
                                  </font>
@@ -309,6 +309,21 @@
                                     <ImageView fitHeight="29.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@images/trash-bin.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <HBox.margin>
+                                    <Insets left="30.0" top="18.0" />
+                                 </HBox.margin>
+                              </JFXButton>
+                              <JFXButton fx:id="botonBuscar" onAction="#buscarPlan" prefHeight="40.0" prefWidth="216.0" style="-fx-background-color: #d8dbe0; -fx-background-radius: 20;" text="Buscar" textFill="#73777d">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="29.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@images/magnifying-glass.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
@@ -326,7 +341,7 @@
                               <Insets left="40.0" right="40.0" top="10.0" />
                            </VBox.margin>
                         </TextField>
-                        <TableView prefHeight="649.0" prefWidth="1060.0" stylesheets="@Gym-connect/src/main/resources/Css/styleTable.css">
+                        <TableView prefHeight="649.0" prefWidth="1060.0">
                            <columns>
                               <TableColumn prefWidth="136.800048828125" text="Nombre" />
                               <TableColumn prefWidth="100.79998779296875" text="Duración" />
