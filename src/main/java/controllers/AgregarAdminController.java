@@ -1,6 +1,5 @@
 package controllers;
 
-import application.app;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import javafx.collections.FXCollections;
@@ -14,8 +13,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.ConexionDatabase;
-import utils.paths;
-
 import java.sql.*;
 
 public class AgregarAdminController {
@@ -29,10 +26,10 @@ public class AgregarAdminController {
     private JFXButton buttonSignUp;
 
     @FXML
-    private JFXComboBox<String> comboEstado;
+    private JFXComboBox<String> EstadoCombo;
 
     @FXML
-    private JFXComboBox<String> comboRol;
+    private JFXComboBox<String> RolCombo;
 
     @FXML
     private Label lblCreateAccount;
@@ -77,8 +74,8 @@ public class AgregarAdminController {
         String correo = txtEmail.getText();
         String contrasena = txtPassword.getText();
         String confirmar = txtConfirmPassword.getText();
-        String rolNombre = comboRol.getValue();
-        String estadoNombre = comboEstado.getValue();
+        String rolNombre = RolCombo.getValue();
+        String estadoNombre = EstadoCombo.getValue();
 
         //Revisa que no hayan campos vacios en el formulario
         if (nombre.isEmpty() || apellido.isEmpty() || documento.isEmpty() || correo.isEmpty() || contrasena.isEmpty()
@@ -139,10 +136,10 @@ public class AgregarAdminController {
 
     //Se asignan que opciones va a tener el formulario en rol y estado
     public void cargarCombos() {
-        comboRol.setItems(FXCollections.observableArrayList(
+        RolCombo.setItems(FXCollections.observableArrayList(
                 "Administrador", "Recepcionista", "Cliente", "Entrenador"
         ));
-        comboEstado.setItems(FXCollections.observableArrayList(
+        EstadoCombo.setItems(FXCollections.observableArrayList(
                 "Activo", "Inactivo", "Suspendido"
         ));
     }
@@ -157,7 +154,7 @@ public class AgregarAdminController {
             while (rs.next()) {
                 roles.add(rs.getString("descripcion"));
             }
-            comboRol.setItems(roles);
+            RolCombo.setItems(roles);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -173,7 +170,7 @@ public class AgregarAdminController {
             while (rs.next()) {
                 estados.add(rs.getString("descripcion"));
             }
-            comboEstado.setItems(estados);
+            EstadoCombo.setItems(estados);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -186,8 +183,8 @@ public class AgregarAdminController {
         txtEmail.clear();
         txtPassword.clear();
         txtConfirmPassword.clear();
-        comboRol.setValue(null);
-        comboEstado.setValue(null);
+        RolCombo.setValue(null);
+        EstadoCombo.setValue(null);
     }
 
     private void mostrarAlerta(Alert.AlertType tipo, String titulo, String mensaje) {

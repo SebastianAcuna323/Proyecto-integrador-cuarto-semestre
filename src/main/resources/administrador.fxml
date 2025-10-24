@@ -235,7 +235,7 @@
                               </JFXButton>
                            </children>
                         </HBox>
-                        <TextField prefHeight="42.0" prefWidth="980.0" promptText="Buscar" style="-fx-background-color: white; -fx-background-radius: 6; -fx-border-radius: 6; -fx-border-color: #dcdfe6; -fx-border-width: 1; -fx-padding: 6 10 6 10;">
+                        <TextField fx:id="buscador" prefHeight="42.0" prefWidth="980.0" promptText="Buscar" style="-fx-background-color: white; -fx-background-radius: 6; -fx-border-radius: 6; -fx-border-color: #dcdfe6; -fx-border-width: 1; -fx-padding: 6 10 6 10;">
                            <font>
                               <Font size="18.0" />
                            </font>

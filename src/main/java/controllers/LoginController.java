@@ -16,7 +16,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.ConexionDatabase;
 import utils.paths;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -118,7 +117,7 @@ public class LoginController {
 
             switch (idRol) {
                 case 1: // Administrador
-                    fxmlPath = "../administrador.fxml";
+                    fxmlPath = paths.ADMINISTRADOR;
                     titulo = "Panel del Administrador";
                     break;
                 case 2: // Entrenador

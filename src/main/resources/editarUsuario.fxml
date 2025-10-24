@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: linear-gradient(#0d4d80 0%, #0a3059 50%, #000000 100%);" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AgregarAdminController">
+<BorderPane prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: linear-gradient(#0d4d80 0%, #0a3059 50%, #000000 100%);" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EditarUsuarioController">
    <center>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
@@ -20,7 +20,7 @@
                <children>
                   <AnchorPane fx:id="panelLogin" prefHeight="570.0" prefWidth="586.0" style="-fx-background-color: white; -fx-background-radius: 10;">
                      <children>
-                        <Label fx:id="lblCreateAccount" layoutX="135.0" layoutY="10.0" prefHeight="58.0" prefWidth="338.0" text="Register new user" textAlignment="CENTER">
+                        <Label fx:id="lblCreateAccount" layoutX="203.0" layoutY="14.0" prefHeight="58.0" prefWidth="180.0" text="Edit user" textAlignment="CENTER">
                            <font>
                               <Font name="System Bold" size="40.0" />
                            </font>
@@ -31,7 +31,7 @@
                         <TextField fx:id="txtEmail" layoutX="101.0" layoutY="324.0" prefHeight="32.0" prefWidth="406.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-color: transparent transparent black transparent; -fx-border-width: 0 0 2 0; -fx-padding: 5 0 5 0; -fx-font-size: 14;" />
                         <TextField fx:id="txtPassword" layoutX="101.0" layoutY="374.0" prefHeight="32.0" prefWidth="406.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: transparent transparent black transparent; -fx-border-width: 0 0 2 0; -fx-padding: 5 0 5 0; -fx-font-size: 14;" />
                         <TextField fx:id="txtConfirmPassword" layoutX="101.0" layoutY="424.0" prefHeight="32.0" prefWidth="406.0" promptText="Confirm Password" style="-fx-background-color: transparent; -fx-border-color: transparent transparent black transparent; -fx-border-width: 0 0 2 0; -fx-padding: 5 0 5 0; -fx-font-size: 14;" />
-                        <JFXButton fx:id="buttonSignUp" layoutX="293.0" layoutY="481.0" onAction="#botonRegistrar" prefHeight="60.0" prefWidth="196.0" style="-fx-background-color: #262626; -fx-background-radius: 30;" text="Sign Up" textFill="WHITE">
+                        <JFXButton fx:id="buttonUpdate" layoutX="293.0" layoutY="481.0" onAction="#botonRegistrar" prefHeight="60.0" prefWidth="196.0" style="-fx-background-color: #262626; -fx-background-radius: 30;" text="Update" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
