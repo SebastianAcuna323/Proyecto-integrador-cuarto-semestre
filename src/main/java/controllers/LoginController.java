@@ -14,6 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import model.ConexionDatabase;
 import utils.paths;
 import java.sql.Connection;
@@ -125,7 +126,7 @@ public class LoginController {
                     titulo = "Panel del Entrenador";
                     break;
                 case 3: // Cliente
-                    fxmlPath = "";
+                    fxmlPath = paths.CLIENTE;
                     titulo = "Panel del Cliente";
                     break;
                 case 4: // Recepcionista
@@ -144,15 +145,14 @@ public class LoginController {
                 Stage stage = new Stage();
                 stage.setTitle(titulo);
                 Scene scene = new Scene(root);
-                stage.setResizable(true);
-                stage.setMinWidth(1300);
-                stage.setMinHeight(900);
-                stage.sizeToScene();
-
                 stage.setScene(scene);
+                stage.setMaximized(true);
+                stage.setResizable(true);
+                stage.sizeToScene(); // Ajusta al tamaño del FXML
+                stage.centerOnScreen(); // Opcional
                 stage.show();
 
-                // Cierra la ventana actual (login)
+                // Cierra la ventana actual
                 Stage ventanaActual = (Stage) txtCorreo.getScene().getWindow();
                 ventanaActual.close();
 

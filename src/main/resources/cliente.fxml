@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXToggleNode?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ClienteController">
+   <left>
+      <VBox prefHeight="200.0" prefWidth="400.0" style="-fx-background-color: linear-gradient(#000000 0%, #0a3059 50%, #0d4d80 100%);" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="0.0" prefWidth="400.0">
+               <children>
+                  <ImageView fitHeight="73.0" fitWidth="93.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/ChatGPT_Image_14_sept_2025__17_57_06-removebg-preview.png" />
+                     </image>
+                  </ImageView>
+                  <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" text="GymConnect" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                     <padding>
+                        <Insets top="22.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+            <JFXToggleNode fx:id="botonInicio" onAction="#mostrarInicio" prefHeight="58.0" prefWidth="288.0" style="-fx-background-color: transparent;" text="   INICIO" textFill="WHITE">
+               <selectedColor>
+                  <Color red="0.557894766330719" green="0.5454970598220825" blue="0.5454970598220825" opacity="0.20000000298023224" />
+               </selectedColor>
+               <VBox.margin>
+                  <Insets left="35.0" top="65.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="23.0" />
+               </font>
+               <toggleGroup>
+                  <ToggleGroup fx:id="menuDash" />
+               </toggleGroup>
+               <graphic>
+                  <ImageView fitHeight="41.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/apartment.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXToggleNode>
+            <JFXToggleNode fx:id="botonRutina" onAction="#mostrarRutina" prefHeight="58.0" prefWidth="288.0" style="-fx-background-color: transparent;" text="   MIS RUTINAS" textFill="WHITE" toggleGroup="$menuDash">
+               <selectedColor>
+                  <Color red="0.557894766330719" green="0.5454970598220825" blue="0.5454970598220825" opacity="0.20000000298023224" />
+               </selectedColor>
+               <font>
+                  <Font name="System Bold" size="23.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="40.0" top="30.0" />
+               </VBox.margin>
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="69.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/routine.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXToggleNode>
+            <JFXToggleNode fx:id="botonPago" onAction="#mostrarPago" prefHeight="58.0" prefWidth="288.0" style="-fx-background-color: transparent;" text="   PAGOS" textFill="WHITE" toggleGroup="$menuDash">
+               <selectedColor>
+                  <Color red="0.557894766330719" green="0.5454970598220825" blue="0.5454970598220825" opacity="0.20000000298023224" />
+               </selectedColor>
+               <font>
+                  <Font name="System Bold" size="23.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="35.0" top="30.0" />
+               </VBox.margin>
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/card.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXToggleNode>
+            <JFXToggleNode fx:id="botonAsistencia" onAction="#mostrarAsistencia" prefHeight="58.0" prefWidth="288.0" style="-fx-background-color: transparent;" text="   ASISTENCIAS" textFill="WHITE">
+               <toggleGroup>
+                  <ToggleGroup fx:id="menuDash1" />
+               </toggleGroup>
+               <selectedColor>
+                  <Color red="0.557894766330719" green="0.5454970598220825" blue="0.5454970598220825" opacity="0.20000000298023224" />
+               </selectedColor>
+               <font>
+                  <Font name="System Bold" size="23.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="40.0" top="30.0" />
+               </VBox.margin>
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/time.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXToggleNode>
+            <JFXToggleNode fx:id="botonConfiguracion" onAction="#mostrarConfiguracion" prefHeight="58.0" prefWidth="288.0" style="-fx-background-color: transparent;" text="   CONFIGURACION" textFill="WHITE">
+               <toggleGroup>
+                  <ToggleGroup fx:id="menuDash11" />
+               </toggleGroup>
+               <selectedColor>
+                  <Color red="0.557894766330719" green="0.5454970598220825" blue="0.5454970598220825" opacity="0.20000000298023224" />
+               </selectedColor>
+               <font>
+                  <Font name="System Bold" size="23.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="40.0" top="30.0" />
+               </VBox.margin>
+               <graphic>
+                  <ImageView fitHeight="52.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/gear.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXToggleNode>
+            <JFXToggleNode fx:id="botonCerrarSesion" onAction="#mostrarCerrarSesion" prefHeight="58.0" prefWidth="288.0" style="-fx-background-color: transparent;" text="   CERRAR SESION" textFill="WHITE">
+               <toggleGroup>
+                  <ToggleGroup fx:id="menuDash111" />
+               </toggleGroup>
+               <selectedColor>
+                  <Color red="0.557894766330719" green="0.5454970598220825" blue="0.5454970598220825" opacity="0.20000000298023224" />
+               </selectedColor>
+               <font>
+                  <Font name="System Bold" size="23.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="40.0" top="170.0" />
+               </VBox.margin>
+               <graphic>
+                  <ImageView fitHeight="37.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/logout%20(1).png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXToggleNode>
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <StackPane BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane fx:id="panelDashboard" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <VBox layoutX="6.0" layoutY="7.0" prefHeight="988.0" prefWidth="1193.0" spacing="20.0" style="-fx-background-color: #f4f6f9;">
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                     <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="77.0" prefWidth="1154.0" spacing="10.0">
+                           <children>
+                              <Label fx:id="lblBienvenida" style="-fx-text-fill: #0a3059;" text="Bienvenido, usuario">
+                                 <font>
+                                    <Font name="System Bold" size="26.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="158.0" prefWidth="1154.0" spacing="20.0">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="100.0" prefWidth="300.0" spacing="5.0" style="-fx-background-radius: 10; -fx-background-color: white; -fx-padding: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1),8,0,0,3);">
+                                 <children>
+                                    <Label text="Plan activo" textFill="#6b7d8f">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lblPlan" text="Sin plan">
+                                       <font>
+                                          <Font name="System Bold" size="22.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" prefHeight="100.0" prefWidth="300.0" spacing="5.0" style="-fx-background-radius: 10; -fx-background-color: white; -fx-padding: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1),8,0,0,3);">
+                                 <children>
+                                    <Label text="Entrenador asignado" textFill="#6b7d8f">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lblEntrenador" text="No aplica">
+                                       <font>
+                                          <Font name="System Bold" size="22.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" prefHeight="100.0" prefWidth="300.0" spacing="5.0" style="-fx-background-radius: 10; -fx-background-color: white; -fx-padding: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1),8,0,0,3);">
+                                 <children>
+                                    <Label text="Proxima sesión" textFill="#6b7d8f">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lblSesion" text="No aplica">
+                                       <font>
+                                          <Font name="System Bold" size="22.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="158.0" prefWidth="1154.0" spacing="20.0">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="100.0" prefWidth="300.0" spacing="5.0" style="-fx-background-radius: 10; -fx-background-color: white; -fx-padding: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1),8,0,0,3);">
+                                 <children>
+                                    <Label text="Asistencias este mes" textFill="#6b7d8f">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lblAsistenciaMes" text="0">
+                                       <font>
+                                          <Font name="System Bold" size="22.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" prefHeight="100.0" prefWidth="300.0" spacing="5.0" style="-fx-background-radius: 10; -fx-background-color: white; -fx-padding: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1),8,0,0,3);">
+                                 <children>
+                                    <Label text="Asistencias totales" textFill="#6b7d8f">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lblAsistenciaTotal" text="0">
+                                       <font>
+                                          <Font name="System Bold" size="22.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" prefHeight="100.0" prefWidth="300.0" spacing="5.0" style="-fx-background-radius: 10; -fx-background-color: white; -fx-padding: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1),8,0,0,3);">
+                                 <children>
+                                    <Label text="Pagos al dia" textFill="#6b7d8f">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lblPagos" text="Si">
+                                       <font>
+                                          <Font name="System Bold" size="22.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="30.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox alignment="TOP_CENTER" prefHeight="238.0" prefWidth="1154.0">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="238.0" prefWidth="437.0" spacing="5.0" style="-fx-background-radius: 10; -fx-background-color: white; -fx-padding: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1),8,0,0,3);">
+                                 <children>
+                                    <Label text="Asistencias por Semana" textFill="#6b7d8f">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <BarChart fx:id="graficoAsistencias">
+                                      <xAxis>
+                                        <CategoryAxis fx:id="ejeX" side="BOTTOM" />
+                                      </xAxis>
+                                      <yAxis>
+                                        <NumberAxis fx:id="ejeY" side="LEFT" />
+                                      </yAxis>
+                                    </BarChart>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" prefHeight="238.0" prefWidth="483.0" spacing="5.0" style="-fx-background-radius: 10; -fx-background-color: white; -fx-padding: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1),8,0,0,3);">
+                                 <children>
+                                    <Label text="Acciones rapidas" textFill="#6b7d8f">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <JFXButton fx:id="botonPagarAhora" onAction="#pagarAhora" style="-fx-background-color: #00bcd4; -fx-background-radius: 6;" text="Pagar ahora" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </JFXButton>
+                                    <Label text="Avisos" textFill="#6b7d8f">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <ScrollPane prefHeight="200.0" prefWidth="200.0">
+                                      <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+                                      </content>
+                                    </ScrollPane>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="30.0" />
+                                 </HBox.margin>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children></AnchorPane>
+            <AnchorPane fx:id="panelUsuarios" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: linear-gradient(#000000 0%, #0a3059 50%, #0d4d80 100%);" visible="false" />
+            <AnchorPane fx:id="panelPlanes" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: linear-gradient(#000000 0%, #0a3059 50%, #0d4d80 100%);" visible="false" />
+         </children>
+      </StackPane>
+   </center>
+</BorderPane>

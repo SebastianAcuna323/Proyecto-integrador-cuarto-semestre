@@ -29,11 +29,9 @@ public class app extends Application {
 
         // Carga el contenedor principal (main.fxml)
         FXMLLoader loader = new FXMLLoader(getClass().getResource(paths.MAIN));
-        //StackPane root = loader.load();
-        //MainController mainController = loader.getController();
         Scene scene = new Scene(loader.load());
         stageWindow.setScene(scene);
-        stageWindow.setMaximized(false);
+        stageWindow.setMaximized(true);
         stageWindow.show();
         stageWindow.setFullScreen(false);
 
@@ -49,6 +47,7 @@ public class app extends Application {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
             Parent pane = loader.load();
+
 
             StackPane rootPane = (StackPane) stageWindow.getScene().getRoot();
             if (rootPane.getChildren().size() > 1) {

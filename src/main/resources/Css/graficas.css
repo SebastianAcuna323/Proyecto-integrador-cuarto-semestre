@@ -1,0 +1,15 @@
+.chart-bar {
+    -fx-bar-fill: #2E8BFF;
+    -fx-background-radius: 5;
+}
+.chart-plot-background {
+    -fx-background-color: transparent;
+}
+.chart-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+.axis-label {
+    -fx-font-size: 13px;
+}
+    

@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
@@ -21,6 +22,8 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Optional;
 
 public class AdministradorController {
     @FXML
@@ -66,6 +69,9 @@ public class AdministradorController {
     private TextField buscador;
 
     @FXML
+    private PieChart graficoOcupacion;
+
+    @FXML
     private TableView<Usuario> tablaUsuarios;
 
     @FXML
@@ -93,6 +99,29 @@ public class AdministradorController {
     private TableColumn<?, ?> colId;
 
     @FXML
+    private BarChart<String, Number> barChartAsistencias;
+
+    @FXML
+    private CategoryAxis xAxis;
+
+    @FXML
+    private NumberAxis yAxis;
+
+    @FXML
+    private BarChart<String, Number> graficoPromedioSemanal;
+
+    @FXML
+    private CategoryAxis ejeX;
+
+    @FXML
+    private NumberAxis ejeY;
+
+    @FXML
+    private JFXToggleNode botonCerrarSesion;
+
+
+
+    @FXML
     private void initialize() {
         colId.setCellValueFactory(new PropertyValueFactory<>("id_usuario"));
         colCedula.setCellValueFactory(new PropertyValueFactory<>("cedula"));
@@ -101,6 +130,11 @@ public class AdministradorController {
         colCorreo.setCellValueFactory(new PropertyValueFactory<>("correo"));
         colRol.setCellValueFactory(new PropertyValueFactory<>("nombreRol"));
         colEstado.setCellValueFactory(new PropertyValueFactory<>("nombreEstado"));
+
+    //Iniciar metodos de las graficas - dashboard
+        cargarAsistenciasDiarias();
+        cargarOcupacionActual();
+        cargarPromedioSemanal();
     }
     private ObservableList<Usuario> listaUsuarios = FXCollections.observableArrayList();
 
@@ -124,6 +158,42 @@ public class AdministradorController {
     void eliminarPlan(ActionEvent event) {
 
     }
+
+    //cerrar sesion
+    @FXML
+    void mostrarCerrarSesion(ActionEvent event) {
+        // Mostrar alerta de confirmación
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmar cierre de sesión");
+        alert.setHeaderText(null);
+        alert.setContentText("¿Está seguro de que desea cerrar sesión?");
+
+        Optional<ButtonType> resultado = alert.showAndWait();
+
+        if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
+            try {
+                // Cargar la ventana de Login.fxml
+                FXMLLoader loader = new FXMLLoader(getClass().getResource(paths.SCENEPRUEBALOGIN));
+                Parent root = loader.load();
+
+                Stage loginStage = new Stage();
+                loginStage.setScene(new Scene(root));
+                loginStage.setTitle("Iniciar sesión");
+                loginStage.show();
+
+                // Cerrar la ventana actual
+                Stage stageActual = (Stage) botonCerrarSesion.getScene().getWindow();
+                stageActual.close();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            // Si cancela, regresa el toggle a su estado original
+            botonCerrarSesion.setSelected(false);
+        }
+    }
+
 
     //------------FUNCIONALIDAD MENU USUARIOS-----------------
 
@@ -312,6 +382,107 @@ public class AdministradorController {
 
     }
 
+    //--------------------GRAFICAS DASHBOARD-------------------------
+
+    private void cargarAsistenciasDiarias() {
+        xAxis.setLabel("Hora del día");
+        yAxis.setLabel("Número de asistencias");
+        barChartAsistencias.setTitle("");
+
+        XYChart.Series<String, Number> serie = new XYChart.Series<>();
+        serie.setName("Hoy");
+
+        String sql = """
+        SELECT DATE_FORMAT(hora, '%H:00') AS hora, COUNT(*) AS total
+        FROM asistencia
+        WHERE fecha = CURDATE()
+        GROUP BY DATE_FORMAT(hora, '%H:00')
+        ORDER BY DATE_FORMAT(hora, '%H:00');
+    """;
+
+        try (Connection conn = ConexionDatabase.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                String hora = rs.getString("hora");
+                int total = rs.getInt("total");
+                serie.getData().add(new XYChart.Data<>(hora, total));
+            }
+
+            barChartAsistencias.getData().clear();
+            barChartAsistencias.getData().add(serie);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static final int CAPACIDAD_MAXIMA = 100; // cámbialo según tu gimnasio
+
+    public void cargarOcupacionActual() {
+        ObservableList<PieChart.Data> datos = FXCollections.observableArrayList();
+
+        String sql = """
+        SELECT COUNT(DISTINCT id_cliente) AS clientes_actuales
+        FROM Asistencia
+        WHERE fecha = CURDATE()
+          AND hora_salida IS NULL;
+    """;
+
+        try (Connection conn = ConexionDatabase.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            if (rs.next()) {
+                int clientesActuales = rs.getInt("clientes_actuales");
+                double porcentaje = (clientesActuales / (double) CAPACIDAD_MAXIMA) * 100.0;
+                double disponible = 100.0 - porcentaje;
+
+                datos.add(new PieChart.Data("Ocupado", porcentaje));
+                datos.add(new PieChart.Data("Disponible", disponible));
+
+                graficoOcupacion.setData(datos);
+                graficoOcupacion.setTitle(String.format("Ocupación actual: %.1f%%", porcentaje));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void cargarPromedioSemanal() {
+        ejeX.setLabel("Día");
+        ejeY.setLabel("Asistencias");
+
+        XYChart.Series<String, Number> serie = new XYChart.Series<>();
+        serie.setName("Asistencias semanales");
+
+        String sql = """
+        SELECT DATE(fecha) AS dia, COUNT(*) AS total_asistencias
+        FROM Asistencia
+        WHERE fecha >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+        GROUP BY DATE(fecha)
+        ORDER BY DATE(fecha);
+    """;
+
+        try (Connection conn = ConexionDatabase.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                String dia = rs.getString("dia");
+                int total = rs.getInt("total_asistencias");
+                serie.getData().add(new XYChart.Data<>(dia, total));
+            }
+
+            graficoPromedioSemanal.getData().clear();
+            graficoPromedioSemanal.getData().add(serie);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     //------------MOSTRAR MENUS LATERAL IZQUIERDA--------------------
     @FXML

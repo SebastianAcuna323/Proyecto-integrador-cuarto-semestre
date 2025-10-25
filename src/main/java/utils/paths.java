@@ -8,5 +8,5 @@ public class paths {
     public static String ADMINISTRADOR = "../administrador.fxml";
     public static String AGREGARUSUARIOADMIN = "../agregar usuario admin.fxml";
     public static String EDITARUSUARIO = "../editarUsuario.fxml";
-
+    public static String CLIENTE = "../cliente.fxml";
 }
