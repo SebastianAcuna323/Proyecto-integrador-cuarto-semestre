@@ -24,6 +24,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
+import model.Administrador;
 
 public class AdministradorController {
     @FXML
@@ -123,6 +124,7 @@ public class AdministradorController {
 
     @FXML
     private void initialize() {
+        //Inicializar tabla de usuarios
         colId.setCellValueFactory(new PropertyValueFactory<>("id_usuario"));
         colCedula.setCellValueFactory(new PropertyValueFactory<>("cedula"));
         colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
@@ -130,11 +132,10 @@ public class AdministradorController {
         colCorreo.setCellValueFactory(new PropertyValueFactory<>("correo"));
         colRol.setCellValueFactory(new PropertyValueFactory<>("nombreRol"));
         colEstado.setCellValueFactory(new PropertyValueFactory<>("nombreEstado"));
-
-    //Iniciar metodos de las graficas - dashboard
-        cargarAsistenciasDiarias();
-        cargarOcupacionActual();
+        //Iniciar metodos de las graficas - dashboard
         cargarPromedioSemanal();
+        cargarOcupacionActual();
+        cargarAsistenciasDiarias();
     }
     private ObservableList<Usuario> listaUsuarios = FXCollections.observableArrayList();
 
@@ -159,40 +160,7 @@ public class AdministradorController {
 
     }
 
-    //cerrar sesion
-    @FXML
-    void mostrarCerrarSesion(ActionEvent event) {
-        // Mostrar alerta de confirmación
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Confirmar cierre de sesión");
-        alert.setHeaderText(null);
-        alert.setContentText("¿Está seguro de que desea cerrar sesión?");
 
-        Optional<ButtonType> resultado = alert.showAndWait();
-
-        if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
-            try {
-                // Cargar la ventana de Login.fxml
-                FXMLLoader loader = new FXMLLoader(getClass().getResource(paths.SCENEPRUEBALOGIN));
-                Parent root = loader.load();
-
-                Stage loginStage = new Stage();
-                loginStage.setScene(new Scene(root));
-                loginStage.setTitle("Iniciar sesión");
-                loginStage.show();
-
-                // Cerrar la ventana actual
-                Stage stageActual = (Stage) botonCerrarSesion.getScene().getWindow();
-                stageActual.close();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else {
-            // Si cancela, regresa el toggle a su estado original
-            botonCerrarSesion.setSelected(false);
-        }
-    }
 
 
     //------------FUNCIONALIDAD MENU USUARIOS-----------------
@@ -208,14 +176,12 @@ public class AdministradorController {
             AgregarAdminController controller = loader.getController();
             controller.cargarCombos();
 
-
             Stage stage = new Stage();
             stage.setMaximized(true);
             stage.setTitle("Registrar nuevo usuario");
             stage.setScene(new Scene(root));
             stage.initModality(Modality.APPLICATION_MODAL); // bloquea la ventana principal hasta cerrar
             stage.showAndWait();
-
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -227,7 +193,6 @@ public class AdministradorController {
         }
 
     }
-
 
     //Mostrar tabla de usuarios
     @FXML
@@ -253,22 +218,18 @@ public class AdministradorController {
            OR u.correo LIKE ? 
         ORDER BY u.id_usuario
     """;
-
         try (Connection conn = ConexionDatabase.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
-
             // Si el campo está vacío, mostramos todos los usuarios
             if (filtro.isEmpty()) {
                 filtro = "%"; // equivale a "todos"
             } else {
                 filtro = "%" + filtro + "%"; // búsqueda parcial
             }
-
             // Asignamos el mismo filtro a cada campo
             for (int i = 1; i <= 4; i++) {
                 stmt.setString(i, filtro);
             }
-
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     Usuario u = new Usuario();
@@ -282,9 +243,7 @@ public class AdministradorController {
                     listaUsuarios.add(u);
                 }
             }
-
             tablaUsuarios.setItems(listaUsuarios);
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -325,61 +284,22 @@ public class AdministradorController {
 
     //Eliminar usuario seleccionado
     @FXML
-    void eliminarUsuario(ActionEvent event) {
-        Usuario usuarioSeleccionado = tablaUsuarios.getSelectionModel().getSelectedItem();
+    private void eliminarUsuario(ActionEvent event) {
+        Usuario seleccionado = tablaUsuarios.getSelectionModel().getSelectedItem();
+        if (seleccionado != null) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Eliminar usuario");
+            alert.setHeaderText(null);
+            alert.setContentText("¿Está seguro de eliminar al usuario?");
+            Optional<ButtonType> resultado = alert.showAndWait();
 
-        if (usuarioSeleccionado == null) {
-            // si no se ha seleccionado ningún usuario
-            javafx.scene.control.Alert alerta = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.WARNING);
-            alerta.setTitle("Eliminar usuario");
-            alerta.setHeaderText(null);
-            alerta.setContentText("Por favor, selecciona un usuario de la tabla para eliminarlo.");
-            alerta.showAndWait();
-            return;
-        }
-
-        // Confirmación antes de eliminar
-        javafx.scene.control.Alert confirmacion = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.CONFIRMATION);
-        confirmacion.setTitle("Confirmar eliminación");
-        confirmacion.setHeaderText("¿Estás seguro de eliminar este usuario?");
-        confirmacion.setContentText(
-                "Nombre: " + usuarioSeleccionado.getNombre() + " " + usuarioSeleccionado.getApellido() + "\n" +
-                        "Correo: " + usuarioSeleccionado.getCorreo()
-        );
-
-        java.util.Optional<javafx.scene.control.ButtonType> resultado = confirmacion.showAndWait();
-
-        if (resultado.isPresent() && resultado.get() == javafx.scene.control.ButtonType.OK) {
-            String sql = "DELETE FROM usuario WHERE id_usuario = ?";
-
-            try (Connection conn = ConexionDatabase.getConnection();
-                 PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-                stmt.setInt(1, usuarioSeleccionado.getId_usuario());
-                int filasAfectadas = stmt.executeUpdate();
-
-                if (filasAfectadas > 0) {
-                    javafx.scene.control.Alert exito = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.INFORMATION);
-                    exito.setTitle("Usuario eliminado");
-                    exito.setHeaderText(null);
-                    exito.setContentText("El usuario ha sido eliminado correctamente.");
-                    exito.showAndWait();
-
-                    // Refresca la tabla
-                    buscarUsuario(null);
+            if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
+                boolean exito = Administrador.eliminarUsuario(seleccionado.getCedula());
+                if (exito) {
+                    tablaUsuarios.getItems().remove(seleccionado);
                 }
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                javafx.scene.control.Alert error = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR);
-                error.setTitle("Error");
-                error.setHeaderText("No se pudo eliminar el usuario");
-                error.setContentText("Error: " + e.getMessage());
-                error.showAndWait();
             }
         }
-
-
     }
 
     //--------------------GRAFICAS DASHBOARD-------------------------
@@ -451,6 +371,7 @@ public class AdministradorController {
         }
     }
 
+
     public void cargarPromedioSemanal() {
         ejeX.setLabel("Día");
         ejeY.setLabel("Asistencias");
@@ -507,6 +428,41 @@ public class AdministradorController {
         panelDashboard.setVisible(false);
         panelUsuarios.setVisible(false);
         panelPlanes.setVisible(false);
+    }
+
+    //cerrar sesion
+    @FXML
+    void mostrarCerrarSesion(ActionEvent event) {
+        // Mostrar alerta de confirmación
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmar cierre de sesión");
+        alert.setHeaderText(null);
+        alert.setContentText("¿Está seguro de que desea cerrar sesión?");
+
+        Optional<ButtonType> resultado = alert.showAndWait();
+
+        if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
+            try {
+                // Cargar la ventana de Login.fxml
+                FXMLLoader loader = new FXMLLoader(getClass().getResource(paths.SCENEPRUEBALOGIN));
+                Parent root = loader.load();
+
+                Stage loginStage = new Stage();
+                loginStage.setScene(new Scene(root));
+                loginStage.setTitle("Iniciar sesión");
+                loginStage.show();
+
+                // Cerrar la ventana actual
+                Stage stageActual = (Stage) botonCerrarSesion.getScene().getWindow();
+                stageActual.close();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            // Si cancela, regresa el toggle a su estado original
+            botonCerrarSesion.setSelected(false);
+        }
     }
 
 }

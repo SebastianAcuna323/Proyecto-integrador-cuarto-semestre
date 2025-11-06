@@ -16,6 +16,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.ConexionDatabase;
+import model.UsuarioSesion;
 import utils.paths;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -80,7 +81,7 @@ public class LoginController {
             }
 
             // Consulta el usuario y el id_rol (es un numero)
-            String sql = "SELECT correo, id_rol FROM usuario WHERE correo = ? AND contraseña = ?";
+            String sql = "SELECT id_usuario, id_rol FROM usuario WHERE correo = ? AND contraseña = ?";
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, correo);
             stmt.setString(2, password);
@@ -88,11 +89,19 @@ public class LoginController {
 
             if (rs.next()) {
                 int idRol = rs.getInt("id_rol");
-                System.out.println("✅ Inicio de sesión correcto. id_rol detectado: " + idRol);
+                int idUsuario = rs.getInt("id_usuario"); // ← nuevo
+
+                // 🔹 Guarda el ID del usuario logueado
+                UsuarioSesion.setIdUsuario(idUsuario);
+                System.out.println("✅ ID guardado en sesión: " + UsuarioSesion.getIdUsuario());
+
+
+                System.out.println("✅ Inicio de sesión correcto. id_usuario: " + idUsuario + " | id_rol: " + idRol);
 
                 mostrarAlerta("Bienvenido", "✅ Sesión iniciada correctamente.", Alert.AlertType.INFORMATION);
                 abrirVentanaPorIdRol(idRol);
-            } else {
+            }
+             else {
                 mostrarAlerta("Error", "❌ Usuario o contraseña incorrectos.", Alert.AlertType.ERROR);
             }
 
