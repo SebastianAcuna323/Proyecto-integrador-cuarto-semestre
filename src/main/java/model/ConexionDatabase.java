@@ -10,7 +10,7 @@ import java.util.Properties;
 public class ConexionDatabase {
     private static Connection conn = null;
 
-    // Metodo principal de la conextio de la base de datos
+    // Metodo principal de la conexion de la base de datos
     public static Connection getConnection() {
         try {
             if (conn == null || conn.isClosed()) {

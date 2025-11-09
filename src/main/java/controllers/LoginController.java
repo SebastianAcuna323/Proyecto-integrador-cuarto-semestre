@@ -139,7 +139,7 @@ public class LoginController {
                     titulo = "Panel del Cliente";
                     break;
                 case 4: // Recepcionista
-                    fxmlPath = "";
+                    fxmlPath = paths.RECEPCIONISTA;
                     titulo = "Panel del Recepcionista";
                     break;
                 default:

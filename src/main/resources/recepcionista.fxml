@@ -1,0 +1,817 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXToggleNode?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.RecepcionistaController">
+   <left>
+      <VBox prefHeight="200.0" prefWidth="400.0" style="-fx-background-color: linear-gradient(#000000 0%, #0a3059 50%, #0d4d80 100%);" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="0.0" prefWidth="400.0">
+               <children>
+                  <ImageView fitHeight="73.0" fitWidth="93.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/ChatGPT_Image_14_sept_2025__17_57_06-removebg-preview.png" />
+                     </image>
+                  </ImageView>
+                  <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" text="GymConnect" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                     <padding>
+                        <Insets top="22.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+            <JFXToggleNode fx:id="botonInicio" onAction="#mostrarInicio" prefHeight="58.0" prefWidth="288.0" style="-fx-background-color: transparent;" text="   INICIO" textFill="WHITE">
+               <selectedColor>
+                  <Color red="0.557894766330719" green="0.5454970598220825" blue="0.5454970598220825" opacity="0.20000000298023224" />
+               </selectedColor>
+               <VBox.margin>
+                  <Insets left="35.0" top="65.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="23.0" />
+               </font>
+               <toggleGroup>
+                  <ToggleGroup fx:id="menuDash" />
+               </toggleGroup>
+               <graphic>
+                  <ImageView fitHeight="41.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/apartment.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXToggleNode>
+            <JFXToggleNode fx:id="botonRutina" onAction="#mostrarClientes" prefHeight="58.0" prefWidth="288.0" style="-fx-background-color: transparent;" text="CLIENTES" textFill="WHITE" toggleGroup="$menuDash">
+               <selectedColor>
+                  <Color red="0.557894766330719" green="0.5454970598220825" blue="0.5454970598220825" opacity="0.20000000298023224" />
+               </selectedColor>
+               <font>
+                  <Font name="System Bold" size="23.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="40.0" top="30.0" />
+               </VBox.margin>
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="69.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/customer.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXToggleNode>
+            <JFXToggleNode fx:id="botonPago" onAction="#mostrarAsistencias" prefHeight="58.0" prefWidth="288.0" style="-fx-background-color: transparent;" text="ASISTENCIAS" textFill="WHITE" toggleGroup="$menuDash">
+               <selectedColor>
+                  <Color red="0.557894766330719" green="0.5454970598220825" blue="0.5454970598220825" opacity="0.20000000298023224" />
+               </selectedColor>
+               <font>
+                  <Font name="System Bold" size="23.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="35.0" top="30.0" />
+               </VBox.margin>
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/calendar.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXToggleNode>
+            <JFXToggleNode fx:id="botonAsistencia" onAction="#mostrarPagos" prefHeight="58.0" prefWidth="288.0" style="-fx-background-color: transparent;" text="PAGOS" textFill="WHITE" toggleGroup="$menuDash">
+               <selectedColor>
+                  <Color red="0.557894766330719" green="0.5454970598220825" blue="0.5454970598220825" opacity="0.20000000298023224" />
+               </selectedColor>
+               <font>
+                  <Font name="System Bold" size="23.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="40.0" top="30.0" />
+               </VBox.margin>
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/card.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXToggleNode>
+            <JFXToggleNode fx:id="botonCerrarSesion" onAction="#mostrarCerrarSesion" prefHeight="58.0" prefWidth="288.0" style="-fx-background-color: transparent;" text="   CERRAR SESION" textFill="WHITE">
+               <toggleGroup>
+                  <ToggleGroup fx:id="menuDash111" />
+               </toggleGroup>
+               <selectedColor>
+                  <Color red="0.557894766330719" green="0.5454970598220825" blue="0.5454970598220825" opacity="0.20000000298023224" />
+               </selectedColor>
+               <font>
+                  <Font name="System Bold" size="23.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="40.0" top="250.0" />
+               </VBox.margin>
+               <graphic>
+                  <ImageView fitHeight="37.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/logout%20(1).png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXToggleNode>
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <StackPane BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane fx:id="panelInicio" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <VBox layoutX="6.0" layoutY="7.0" prefHeight="988.0" prefWidth="1193.0" spacing="20.0" style="-fx-background-color: #f4f6f9;">
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                     <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="77.0" prefWidth="1154.0" spacing="10.0">
+                           <children>
+                              <Label fx:id="lblBienvenida" style="-fx-text-fill: #0a3059;" text="Bienvenido">
+                                 <font>
+                                    <Font name="System Bold" size="26.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="158.0" prefWidth="1154.0" spacing="20.0">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="100.0" prefWidth="300.0" spacing="5.0" style="-fx-background-radius: 10; -fx-background-color: white; -fx-padding: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1),8,0,0,3);">
+                                 <children>
+                                    <Label text="Clientes activos hoy" textFill="#6b7d8f">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lblClientesActivos" text="0">
+                                       <font>
+                                          <Font name="System Bold" size="22.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" prefHeight="100.0" prefWidth="300.0" spacing="5.0" style="-fx-background-radius: 10; -fx-background-color: white; -fx-padding: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1),8,0,0,3);">
+                                 <children>
+                                    <Label text="Pagos pendientes" textFill="#6b7d8f">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lblPagosPendientes" text="0">
+                                       <font>
+                                          <Font name="System Bold" size="22.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" prefHeight="100.0" prefWidth="300.0" spacing="5.0" style="-fx-background-radius: 10; -fx-background-color: white; -fx-padding: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1),8,0,0,3);">
+                                 <children>
+                                    <Label text="Nuevos clientes registrados" textFill="#6b7d8f">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lblNuevosClientes" text="0">
+                                       <font>
+                                          <Font name="System Bold" size="22.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="387.0" prefWidth="1154.0" spacing="20.0">
+                           <children>
+                              <VBox prefHeight="387.0" prefWidth="938.0" spacing="5.0" style="-fx-background-radius: 10; -fx-background-color: white; -fx-padding: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1),8,0,0,3);">
+                                 <children>
+                                    <Label text="Últimas asitencias registradas" textFill="#6b7d8f">
+                                       <font>
+                                          <Font name="System Bold" size="25.0" />
+                                       </font>
+                                    </Label>
+                                    <TableView fx:id="tablaUltimasAsistencias" prefHeight="298.0" prefWidth="908.0">
+                                      <columns>
+                                        <TableColumn fx:id="colClienteInicio" prefWidth="296.7999030947685" text="Cliente" />
+                                        <TableColumn fx:id="colHoraInicio" prefWidth="213.60003662109375" text="Hora" />
+                                          <TableColumn fx:id="colFechaInicio" prefWidth="215.199951171875" text="Fecha" />
+                                          <TableColumn fx:id="colPlanInicio" prefWidth="182.39996337890625" text="Plan" />
+                                      </columns>
+                                       <VBox.margin>
+                                          <Insets top="30.0" />
+                                       </VBox.margin>
+                                    </TableView>
+                                 </children>
+                              </VBox>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="30.0" />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children></AnchorPane>
+            <AnchorPane fx:id="panelClientes" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" visible="false">
+               <children>
+                  <VBox layoutY="14.0" prefHeight="95.0" prefWidth="428.0">
+                     <children>
+                        <HBox prefHeight="56.0" prefWidth="428.0">
+                           <children>
+                              <Pane prefHeight="56.0" prefWidth="25.0" />
+                              <Label fx:id="lblTituloRutinas" text="Gestión de clientes">
+                                 <font>
+                                    <Font name="System Bold" size="33.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="30.0" prefWidth="428.0">
+                           <children>
+                              <Pane prefHeight="30.0" prefWidth="44.0" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <HBox layoutY="109.0" prefHeight="673.0" prefWidth="1198.0" spacing="40.0">
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                     <children>
+                        <VBox prefHeight="370.0" prefWidth="1159.0">
+                           <children>
+                              <HBox prefHeight="263.0" prefWidth="1159.0" spacing="15.0">
+                                 <children>
+                                    <VBox alignment="TOP_CENTER" prefHeight="179.0" prefWidth="740.0" spacing="5.0" style="-fx-background-radius: 10; -fx-background-color: white; -fx-padding: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1),8,0,0,3);">
+                                       <children>
+                                          <HBox prefHeight="30.0" prefWidth="710.0">
+                                             <children>
+                                                <TextField fx:id="txtBuscarCliente" prefHeight="42.0" prefWidth="413.0" promptText="Buscar por nombre o cedula" style="-fx-background-color: white; -fx-background-radius: 6; -fx-border-radius: 6; -fx-border-color: #dcdfe6; -fx-border-width: 1; -fx-padding: 6 10 6 10;">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </TextField>
+                                                <JFXComboBox fx:id="ComboTodos" prefHeight="26.0" prefWidth="121.0" promptText="Todos">
+                                                   <HBox.margin>
+                                                      <Insets left="20.0" />
+                                                   </HBox.margin>
+                                                </JFXComboBox>
+                                                <JFXButton fx:id="botonBuscarCliente" onAction="#buscarCliente" prefHeight="39.0" prefWidth="100.0" style="-fx-background-color: #0a3059; -fx-background-radius: 20;" text="Buscar" textFill="WHITE">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets left="25.0" />
+                                                   </HBox.margin>
+                                                </JFXButton>
+                                             </children>
+                                          </HBox>
+                                          <TableView fx:id="tablaClientes" prefHeight="262.0" prefWidth="710.0">
+                                            <columns>
+                                              <TableColumn fx:id="colCedula" prefWidth="140.00000303983688" text="Cedula" />
+                                              <TableColumn fx:id="colNombre" prefWidth="125.59996032714844" text="Nombre" />
+                                                <TableColumn fx:id="colTelefono" prefWidth="112.800048828125" text="Télefono" />
+                                                <TableColumn fx:id="colCorreo" prefWidth="108.0" text="Correo" />
+                                                <TableColumn fx:id="colPlan" prefWidth="123.99993896484375" text="Plan" />
+                                                <TableColumn fx:id="colEstado" prefWidth="95.2000732421875" text="Estado" />
+                                            </columns>
+                                             <VBox.margin>
+                                                <Insets top="30.0" />
+                                             </VBox.margin>
+                                          </TableView>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <Pane fx:id="tablaCliente" prefHeight="43.0" prefWidth="494.0" />
+                              <HBox prefHeight="322.0" prefWidth="1159.0">
+                                 <children>
+                                    <VBox fx:id="boxBasico11" alignment="TOP_CENTER" prefHeight="394.0" prefWidth="740.0" spacing="5.0" style="-fx-background-radius: 10; -fx-background-color: white; -fx-padding: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1),8,0,0,3);">
+                                       <children>
+                                          <HBox prefHeight="30.0" prefWidth="710.0">
+                                             <children>
+                                                <Label text="Registro/Edición del cliente">
+                                                   <font>
+                                                      <Font name="System Bold" size="23.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets bottom="20.0" />
+                                             </VBox.margin>
+                                          </HBox>
+                                          <HBox alignment="CENTER" prefHeight="134.0" prefWidth="710.0">
+                                             <children>
+                                                <VBox prefHeight="100.0" prefWidth="350.0">
+                                                   <children>
+                                                      <HBox prefHeight="16.0" prefWidth="227.0">
+                                                         <children>
+                                                            <Label prefHeight="28.0" prefWidth="85.0" text="Cedula">
+                                                               <font>
+                                                                  <Font name="System Bold" size="19.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <TextField fx:id="txtCedula" prefHeight="27.0" prefWidth="192.0" style="-fx-background-color: transparent; -fx-border-color: #dcdfe6; -fx-background-radius: 6; -fx-border-radius: 6;">
+                                                               <HBox.margin>
+                                                                  <Insets left="20.0" />
+                                                               </HBox.margin>
+                                                            </TextField>
+                                                         </children>
+                                                         <VBox.margin>
+                                                            <Insets bottom="20.0" />
+                                                         </VBox.margin>
+                                                      </HBox>
+                                                      <HBox prefHeight="1.0" prefWidth="227.0">
+                                                         <children>
+                                                            <Label prefHeight="28.0" prefWidth="90.0" text="Nombres">
+                                                               <font>
+                                                                  <Font name="System Bold" size="19.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <TextField fx:id="txtNombre" prefHeight="27.0" prefWidth="192.0" style="-fx-background-color: transparent; -fx-border-color: #dcdfe6; -fx-background-radius: 6; -fx-border-radius: 6;">
+                                                               <HBox.margin>
+                                                                  <Insets left="15.0" />
+                                                               </HBox.margin>
+                                                            </TextField>
+                                                         </children>
+                                                         <VBox.margin>
+                                                            <Insets bottom="20.0" />
+                                                         </VBox.margin>
+                                                      </HBox>
+                                                      <HBox prefHeight="37.0" prefWidth="350.0">
+                                                         <children>
+                                                            <Label prefHeight="28.0" prefWidth="105.0" text="Apellidos">
+                                                               <font>
+                                                                  <Font name="System Bold" size="19.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <TextField fx:id="txtApellido" prefHeight="27.0" prefWidth="193.0" style="-fx-background-color: transparent; -fx-border-color: #dcdfe6; -fx-background-radius: 6; -fx-border-radius: 6;">
+                                                               <HBox.margin>
+                                                                  <Insets />
+                                                               </HBox.margin>
+                                                            </TextField>
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </VBox>
+                                                <VBox prefHeight="100.0" prefWidth="350.0">
+                                                   <children>
+                                                      <HBox prefHeight="4.0" prefWidth="222.0">
+                                                         <children>
+                                                            <Label prefHeight="28.0" prefWidth="90.0" text="Télefono">
+                                                               <font>
+                                                                  <Font name="System Bold" size="19.0" />
+                                                               </font>
+                                                               <HBox.margin>
+                                                                  <Insets right="50.0" />
+                                                               </HBox.margin>
+                                                            </Label>
+                                                            <TextField fx:id="txtTelefono" prefHeight="27.0" prefWidth="220.0" style="-fx-background-color: transparent; -fx-border-color: #dcdfe6; -fx-background-radius: 6; -fx-border-radius: 6;">
+                                                               <HBox.margin>
+                                                                  <Insets left="5.0" />
+                                                               </HBox.margin>
+                                                            </TextField>
+                                                         </children>
+                                                         <VBox.margin>
+                                                            <Insets bottom="20.0" />
+                                                         </VBox.margin>
+                                                      </HBox>
+                                                      <HBox prefHeight="0.0" prefWidth="222.0">
+                                                         <children>
+                                                            <Label prefHeight="28.0" prefWidth="74.0" text="Correo">
+                                                               <font>
+                                                                  <Font name="System Bold" size="19.0" />
+                                                               </font>
+                                                               <HBox.margin>
+                                                                  <Insets right="70.0" />
+                                                               </HBox.margin>
+                                                            </Label>
+                                                            <TextField fx:id="txtCorreo" prefHeight="27.0" prefWidth="218.0" style="-fx-background-color: transparent; -fx-border-color: #dcdfe6; -fx-background-radius: 6; -fx-border-radius: 6;">
+                                                               <HBox.margin>
+                                                                  <Insets left="2.0" />
+                                                               </HBox.margin>
+                                                            </TextField>
+                                                         </children>
+                                                         <VBox.margin>
+                                                            <Insets bottom="20.0" />
+                                                         </VBox.margin>
+                                                      </HBox>
+                                                      <HBox prefHeight="100.0" prefWidth="200.0">
+                                                         <children>
+                                                            <Label prefHeight="28.0" prefWidth="102.0" text="Dirección">
+                                                               <font>
+                                                                  <Font name="System Bold" size="19.0" />
+                                                               </font>
+                                                               <HBox.margin>
+                                                                  <Insets right="30.0" />
+                                                               </HBox.margin>
+                                                            </Label>
+                                                            <TextField fx:id="txtDireccion" prefHeight="27.0" prefWidth="218.0" style="-fx-background-color: transparent; -fx-border-color: #dcdfe6; -fx-background-radius: 6; -fx-border-radius: 6;">
+                                                               <HBox.margin>
+                                                                  <Insets left="14.0" />
+                                                               </HBox.margin>
+                                                            </TextField>
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                          <HBox prefHeight="8.0" prefWidth="694.0">
+                                             <children>
+                                                <Label prefHeight="28.0" prefWidth="114.0" text="Tipo de plan">
+                                                   <font>
+                                                      <Font name="System Bold" size="19.0" />
+                                                   </font>
+                                                </Label>
+                                                <JFXComboBox fx:id="comboPlan" prefHeight="26.0" prefWidth="118.0">
+                                                   <HBox.margin>
+                                                      <Insets left="30.0" />
+                                                   </HBox.margin>
+                                                </JFXComboBox>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets left="5.0" top="10.0" />
+                                             </VBox.margin>
+                                          </HBox>
+                                          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                             <children>
+                                                <JFXButton fx:id="botonRegistrarCliente" onAction="#registrarCliente" prefHeight="39.0" prefWidth="100.0" style="-fx-background-color: #0a3059; -fx-background-radius: 20;" text="Registrar" textFill="WHITE">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets right="20.0" top="15.0" />
+                                                   </HBox.margin>
+                                                </JFXButton>
+                                                <JFXButton fx:id="botonActualizarCliente" onAction="#actualizarCliente" prefHeight="39.0" prefWidth="100.0" style="-fx-background-color: #0a3059; -fx-background-radius: 20;" text="Actualizar" textFill="WHITE">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets right="20.0" top="15.0" />
+                                                   </HBox.margin>
+                                                </JFXButton>
+                                                <JFXButton fx:id="botonEliminarCliente" onAction="#eliminarCliente" prefHeight="39.0" prefWidth="100.0" style="-fx-background-color: #0a3059; -fx-background-radius: 20;" text="Eliminar" textFill="WHITE">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets right="20.0" top="15.0" />
+                                                   </HBox.margin>
+                                                </JFXButton>
+                                                <JFXButton fx:id="botonLimpiar" onAction="#limpiarCampos" prefHeight="39.0" prefWidth="100.0" style="-fx-background-color: #0a3059; -fx-background-radius: 20;" text="Limpiar" textFill="WHITE">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets top="15.0" />
+                                                   </HBox.margin>
+                                                </JFXButton>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="panelAsistencias" prefHeight="200.0" prefWidth="200.0" visible="false">
+               <children>
+                  <VBox layoutY="14.0" prefHeight="95.0" prefWidth="428.0">
+                     <children>
+                        <HBox prefHeight="56.0" prefWidth="428.0">
+                           <children>
+                              <Pane prefHeight="56.0" prefWidth="25.0" />
+                              <Label fx:id="lblTitulo" text="Control de asistencias">
+                                 <font>
+                                    <Font name="System Bold" size="33.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <HBox layoutY="109.0" prefHeight="317.0" prefWidth="1190.0" spacing="40.0">
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" />
+                     </padding>
+                     <children>
+                        <VBox prefHeight="289.0" prefWidth="1151.0">
+                           <children>
+                              <HBox prefHeight="252.0" prefWidth="949.0" spacing="15.0">
+                                 <children>
+                                    <VBox fx:id="boxBasico" prefHeight="240.0" prefWidth="504.0" spacing="5.0" style="-fx-background-radius: 10; -fx-background-color: white; -fx-padding: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1),8,0,0,3);">
+                                       <children>
+                                          <VBox prefHeight="175.0" prefWidth="474.0">
+                                             <children>
+                                                <Label alignment="BOTTOM_CENTER" prefHeight="22.0" prefWidth="70.0" text="Cedula">
+                                                   <font>
+                                                      <Font size="15.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="txtCedulaCliente" prefHeight="42.0" prefWidth="376.0" style="-fx-background-color: white; -fx-background-radius: 6; -fx-border-radius: 6; -fx-border-color: #dcdfe6; -fx-border-width: 1; -fx-padding: 6 10 6 10;">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </TextField>
+                                                <Label alignment="BOTTOM_CENTER" prefHeight="22.0" prefWidth="70.0" text="Fecha">
+                                                   <font>
+                                                      <Font size="15.0" />
+                                                   </font>
+                                                </Label>
+                                                <DatePicker fx:id="dpFechaAsistencia" prefHeight="42.0" prefWidth="476.0" />
+                                             </children>
+                                          </VBox>
+                                          <HBox prefHeight="58.0" prefWidth="474.0">
+                                             <children>
+                                                <JFXButton fx:id="botonRegistrarAsistecia" onAction="#registrarAsistencia" prefHeight="39.0" prefWidth="100.0" style="-fx-background-color: #0a3059; -fx-background-radius: 20;" text="Registrar" textFill="WHITE">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                </JFXButton>
+                                                <JFXButton fx:id="botonBuscarAsistencia" onAction="#buscarAsistencia" prefHeight="39.0" prefWidth="100.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-border-color: #dcdfe6; -fx-border-radius: 20;" text="Buscar">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets left="15.0" />
+                                                   </HBox.margin>
+                                                </JFXButton>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                    <VBox fx:id="boxBasico2" prefHeight="240.0" prefWidth="504.0" spacing="5.0" style="-fx-background-radius: 10; -fx-background-color: white; -fx-padding: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1),8,0,0,3);">
+                                       <children>
+                                          <VBox prefHeight="174.0" prefWidth="474.0">
+                                             <children>
+                                                <Label alignment="BOTTOM_CENTER" prefHeight="22.0" prefWidth="70.0" text="Nombre">
+                                                   <font>
+                                                      <Font size="15.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="lblNombreCliente" text="Nombre cliente">
+                                                   <VBox.margin>
+                                                      <Insets bottom="8.0" left="15.0" top="5.0" />
+                                                   </VBox.margin>
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label alignment="BOTTOM_CENTER" prefHeight="22.0" prefWidth="70.0" text="Hora">
+                                                   <font>
+                                                      <Font size="15.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="lblHoraActual" text="Hora sistema">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets left="15.0" top="8.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <Pane prefHeight="43.0" prefWidth="494.0" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <VBox fx:id="boxBasico21" layoutX="24.0" layoutY="438.0" prefHeight="323.0" prefWidth="1018.0" spacing="5.0" style="-fx-background-radius: 10; -fx-background-color: white; -fx-padding: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1),8,0,0,3);">
+                     <children>
+                        <Label fx:id="lblTitulo1" text="Asistencias del día">
+                           <font>
+                              <Font name="System Bold" size="25.0" />
+                           </font>
+                        </Label>
+                        <TableView fx:id="tablaAsistencias" prefHeight="150.0" prefWidth="988.0">
+                          <columns>
+                            <TableColumn fx:id="colCliente" prefWidth="208.80005186796188" text="Cliente" />
+                            <TableColumn fx:id="colFecha" prefWidth="216.79991149902344" text="Fecha" />
+                              <TableColumn fx:id="colHora" prefWidth="186.4000244140625" text="Hora" />
+                              <TableColumn fx:id="colPlan" prefWidth="195.20001220703125" text="Plan" />
+                              <TableColumn fx:id="colEstado" prefWidth="155.199951171875" text="Estado" />
+                          </columns>
+                           <VBox.margin>
+                              <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
+                           </VBox.margin>
+                        </TableView>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <VBox fx:id="boxBasico211" alignment="CENTER" prefHeight="323.0" prefWidth="1018.0" spacing="5.0" style="-fx-background-radius: 10; -fx-background-color: white; -fx-padding: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1),8,0,0,3);">
+                                 <children>
+                                    <Label fx:id="lblTitulo11" text="Total asistencias hoy">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lblAsistenciasHoy" text="0">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <VBox fx:id="boxBasico2111" alignment="CENTER" prefHeight="323.0" prefWidth="1018.0" spacing="5.0" style="-fx-background-radius: 10; -fx-background-color: white; -fx-padding: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1),8,0,0,3);">
+                                 <children>
+                                    <Label fx:id="lblTitulo111" text="Asistencias esta semana">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lblAsistenciasSemana" text="0">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children></AnchorPane>
+            <AnchorPane fx:id="panelPagos" prefHeight="200.0" prefWidth="200.0" visible="false">
+               <children>
+                  <VBox layoutX="14.0" layoutY="14.0" prefHeight="121.0" prefWidth="1066.0">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Pane prefHeight="100.0" prefWidth="14.0" />
+                              <Label text="Gestión de pagos">
+                                 <font>
+                                    <Font name="System Bold" size="33.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="60.0" />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <HBox layoutX="22.0" layoutY="136.0" prefHeight="270.0" prefWidth="1066.0" style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 3); -fx-background-color: white; -fx-background-radius: 10; -fx-padding: 15;">
+                     <children>
+                        <VBox prefHeight="300.0" prefWidth="358.0">
+                           <children>
+                              <Label text="Cedula">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="txtCedulaPago" prefHeight="42.0" prefWidth="770.0" style="-fx-background-color: white; -fx-background-radius: 6; -fx-border-radius: 6; -fx-border-color: #dcdfe6; -fx-border-width: 1; -fx-padding: 6 10 6 10;">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </TextField>
+                              <Label text="Monto">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="txtMonto" prefHeight="42.0" prefWidth="376.0" style="-fx-background-color: white; -fx-background-radius: 6; -fx-border-radius: 6; -fx-border-color: #dcdfe6; -fx-border-width: 1; -fx-padding: 6 10 6 10;">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </TextField>
+                              <JFXButton fx:id="botonRegistrarPago" onAction="#registrarPago" prefHeight="39.0" prefWidth="138.0" style="-fx-background-color: #0a3059; -fx-background-radius: 20;" text="Registrar pago" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="20.0" />
+                                 </VBox.margin>
+                              </JFXButton>
+                           </children>
+                           <padding>
+                              <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                           </padding>
+                        </VBox>
+                        <VBox prefHeight="300.0" prefWidth="358.0">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                           <padding>
+                              <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                           </padding>
+                           <children>
+                              <Label text="Nombre">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="7.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label fx:id="lblNombrePagos" text="Nombre cliente">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="6.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label text="Método">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <ComboBox fx:id="comboMetodoPagos" prefHeight="38.0" prefWidth="312.0" style="-fx-background-color: transparent; -fx-border-color: #dcdfe6; -fx-border-radius: 6;" />
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="200.0" prefWidth="358.0">
+                           <children>
+                              <Label text="Plan">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                              </Label>
+                              <ComboBox fx:id="comboPlanPago" prefHeight="38.0" prefWidth="312.0" style="-fx-background-color: transparent; -fx-border-color: #dcdfe6; -fx-border-radius: 6;">
+                                 <VBox.margin>
+                                    <Insets bottom="6.0" />
+                                 </VBox.margin>
+                              </ComboBox>
+                              <Label text="Fecha">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                              </Label>
+                              <DatePicker fx:id="datePagos" prefHeight="38.0" prefWidth="312.0" />
+                           </children>
+                           <padding>
+                              <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="28.0" layoutY="444.0" prefHeight="270.0" prefWidth="1066.0" style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 3); -fx-background-color: white; -fx-background-radius: 10; -fx-padding: 15;">
+                     <children>
+                        <VBox prefHeight="240.0" prefWidth="1019.0">
+                           <children>
+                              <Label text="Pagos registrados">
+                                 <font>
+                                    <Font name="System Bold" size="24.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="15.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <TableView fx:id="tablaPagosRegistrados" prefHeight="200.0" prefWidth="200.0">
+                                <columns>
+                                  <TableColumn fx:id="colClientePagos" prefWidth="287.199927508831" text="Cliente" />
+                                  <TableColumn fx:id="colPlanPagos" prefWidth="196.0" text="Plan" />
+                                    <TableColumn fx:id="colMonto" prefWidth="191.20001220703125" text="Monto" />
+                                    <TableColumn fx:id="colMetodoPagos" prefWidth="145.5999755859375" text="Método" />
+                                    <TableColumn fx:id="colFechaPago" prefWidth="165.5999755859375" text="Fecha" />
+                                </columns>
+                              </TableView>
+                           </children>
+                           <padding>
+                              <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children></AnchorPane>
+         </children>
+      </StackPane>
+   </center>
+</BorderPane>

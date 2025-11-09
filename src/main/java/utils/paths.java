@@ -9,4 +9,5 @@ public class paths {
     public static String AGREGARUSUARIOADMIN = "../agregar usuario admin.fxml";
     public static String EDITARUSUARIO = "../editarUsuario.fxml";
     public static String CLIENTE = "../cliente.fxml";
+    public static String RECEPCIONISTA = "../recepcionista.fxml";
 }
