@@ -131,7 +131,7 @@ public class LoginController {
                     titulo = "Panel del Administrador";
                     break;
                 case 2: // Entrenador
-                    fxmlPath = "";
+                    fxmlPath = paths.ENTRENADOR;
                     titulo = "Panel del Entrenador";
                     break;
                 case 3: // Cliente
@@ -158,7 +158,7 @@ public class LoginController {
                 stage.setMaximized(true);
                 stage.setResizable(true);
                 stage.sizeToScene(); // Ajusta al tamaño del FXML
-                stage.centerOnScreen(); // Opcional
+                stage.centerOnScreen();
                 stage.show();
 
                 // Cierra la ventana actual

@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXToggleNode?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EntrenadorController">
+   <left>
+      <VBox prefHeight="200.0" prefWidth="400.0" style="-fx-background-color: linear-gradient(#000000 0%, #0a3059 50%, #0d4d80 100%);" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="0.0" prefWidth="400.0">
+               <children>
+                  <ImageView fitHeight="73.0" fitWidth="93.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/ChatGPT_Image_14_sept_2025__17_57_06-removebg-preview.png" />
+                     </image>
+                  </ImageView>
+                  <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" text="GymConnect" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                     <padding>
+                        <Insets top="22.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+            <JFXToggleNode fx:id="botonInicio" onAction="#mostrarInicio" prefHeight="58.0" prefWidth="288.0" style="-fx-background-color: transparent;" text="   INICIO" textFill="WHITE">
+               <selectedColor>
+                  <Color red="0.557894766330719" green="0.5454970598220825" blue="0.5454970598220825" opacity="0.20000000298023224" />
+               </selectedColor>
+               <VBox.margin>
+                  <Insets left="35.0" top="65.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="23.0" />
+               </font>
+               <toggleGroup>
+                  <ToggleGroup fx:id="menuDash" />
+               </toggleGroup>
+               <graphic>
+                  <ImageView fitHeight="41.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/apartment.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXToggleNode>
+            <JFXToggleNode fx:id="botonMisClientes" onAction="#mostrarMisClientes" prefHeight="58.0" prefWidth="288.0" style="-fx-background-color: transparent;" text="MIS CLIENTES" textFill="WHITE" toggleGroup="$menuDash">
+               <selectedColor>
+                  <Color red="0.557894766330719" green="0.5454970598220825" blue="0.5454970598220825" opacity="0.20000000298023224" />
+               </selectedColor>
+               <font>
+                  <Font name="System Bold" size="23.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="40.0" top="30.0" />
+               </VBox.margin>
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="69.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/customer.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXToggleNode>
+            <JFXToggleNode fx:id="botonRutinas" onAction="#mostrarRutina" prefHeight="58.0" prefWidth="288.0" style="-fx-background-color: transparent;" text="RUTINAS" textFill="WHITE" toggleGroup="$menuDash">
+               <selectedColor>
+                  <Color red="0.557894766330719" green="0.5454970598220825" blue="0.5454970598220825" opacity="0.20000000298023224" />
+               </selectedColor>
+               <font>
+                  <Font name="System Bold" size="23.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="35.0" top="30.0" />
+               </VBox.margin>
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/calendar.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXToggleNode>
+            <JFXToggleNode fx:id="botonCerrarSesion" onAction="#mostrarCerrarSesion" prefHeight="58.0" prefWidth="288.0" style="-fx-background-color: transparent;" text="   CERRAR SESION" textFill="WHITE">
+               <toggleGroup>
+                  <ToggleGroup fx:id="menuDash111" />
+               </toggleGroup>
+               <selectedColor>
+                  <Color red="0.557894766330719" green="0.5454970598220825" blue="0.5454970598220825" opacity="0.20000000298023224" />
+               </selectedColor>
+               <font>
+                  <Font name="System Bold" size="23.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="40.0" top="320.0" />
+               </VBox.margin>
+               <graphic>
+                  <ImageView fitHeight="37.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/logout%20(1).png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXToggleNode>
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <StackPane BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane fx:id="panelInicio" prefHeight="200.0" prefWidth="200.0" visible="false">
+               <children>
+                  <VBox layoutX="6.0" layoutY="7.0" prefHeight="988.0" prefWidth="1193.0" spacing="20.0" style="-fx-background-color: #f4f6f9;">
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                     <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="77.0" prefWidth="1154.0" spacing="10.0">
+                           <children>
+                              <Label fx:id="lblBienvenida" style="-fx-text-fill: #0a3059;" text="Bienvenido">
+                                 <font>
+                                    <Font name="System Bold" size="26.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="158.0" prefWidth="1154.0" spacing="20.0">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="100.0" prefWidth="400.0" spacing="5.0" style="-fx-background-radius: 10; -fx-background-color: white; -fx-padding: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1),8,0,0,3);">
+                                 <children>
+                                    <Label text="Clientes asignados" textFill="#6b7d8f">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lblClientesAsignados" text="0">
+                                       <font>
+                                          <Font name="System Bold" size="22.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" prefHeight="100.0" prefWidth="400.0" spacing="5.0" style="-fx-background-radius: 10; -fx-background-color: white; -fx-padding: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1),8,0,0,3);">
+                                 <children>
+                                    <Label text="Rutinas creadas" textFill="#6b7d8f">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lblRutinasCreadas" text="0">
+                                       <font>
+                                          <Font name="System Bold" size="22.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="387.0" prefWidth="1154.0" spacing="20.0">
+                           <children>
+                              <VBox prefHeight="387.0" prefWidth="938.0" spacing="5.0" style="-fx-background-radius: 10; -fx-background-color: white; -fx-padding: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1),8,0,0,3);">
+                                 <children>
+                                    <Label text="Resumen de clientes asignados" textFill="#6b7d8f">
+                                       <font>
+                                          <Font name="System Bold" size="25.0" />
+                                       </font>
+                                    </Label>
+                                    <TableView fx:id="tablaResumenClientes" prefHeight="298.0" prefWidth="908.0">
+                                      <columns>
+                                        <TableColumn fx:id="colCliente" prefWidth="328.7999641299248" text="Cliente" />
+                                        <TableColumn fx:id="colPlan" prefWidth="296.0" text="Plan" />
+                                          <TableColumn fx:id="colEstado" prefWidth="281.5999755859375" text="Estado" />
+                                      </columns>
+                                       <VBox.margin>
+                                          <Insets top="30.0" />
+                                       </VBox.margin>
+                                    </TableView>
+                                 </children>
+                              </VBox>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="30.0" />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children></AnchorPane>
+            <AnchorPane fx:id="panelClientes" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" visible="false">
+               <children>
+                  <VBox layoutY="14.0" prefHeight="95.0" prefWidth="428.0">
+                     <children>
+                        <HBox prefHeight="56.0" prefWidth="428.0">
+                           <children>
+                              <Pane prefHeight="56.0" prefWidth="25.0" />
+                              <Label fx:id="lblTituloRutinas" text="Mis clientes">
+                                 <font>
+                                    <Font name="System Bold" size="33.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="30.0" prefWidth="428.0">
+                           <children>
+                              <Pane prefHeight="30.0" prefWidth="44.0" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <HBox layoutY="109.0" prefHeight="673.0" prefWidth="1198.0" spacing="40.0">
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                     <children>
+                        <VBox prefHeight="370.0" prefWidth="1159.0">
+                           <children>
+                              <HBox prefHeight="851.0" prefWidth="1159.0" spacing="15.0">
+                                 <children>
+                                    <VBox alignment="TOP_CENTER" prefHeight="415.0" prefWidth="740.0" spacing="5.0" style="-fx-background-radius: 10; -fx-background-color: white; -fx-padding: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1),8,0,0,3);">
+                                       <children>
+                                          <HBox prefHeight="30.0" prefWidth="710.0">
+                                             <children>
+                                                <TextField fx:id="txtBuscarCliente" prefHeight="42.0" prefWidth="413.0" promptText="Buscar por nombre o cedula" style="-fx-background-color: white; -fx-background-radius: 6; -fx-border-radius: 6; -fx-border-color: #dcdfe6; -fx-border-width: 1; -fx-padding: 6 10 6 10;">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </TextField>
+                                                <JFXButton fx:id="botonBuscarCliente" onAction="#buscarClienteEntrenador" prefHeight="39.0" prefWidth="100.0" style="-fx-background-color: #0a3059; -fx-background-radius: 20;" text="Buscar" textFill="WHITE">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets left="25.0" />
+                                                   </HBox.margin>
+                                                </JFXButton>
+                                                <JFXButton fx:id="botonVerRutinas" onAction="#verRutinasCliente" prefHeight="39.0" prefWidth="100.0" style="-fx-background-color: #0a3059; -fx-background-radius: 20;" text="Ver rutinas" textFill="WHITE">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets left="15.0" />
+                                                   </HBox.margin>
+                                                </JFXButton>
+                                             </children>
+                                          </HBox>
+                                          <TableView fx:id="tablaClientesEntrenador" prefHeight="453.0" prefWidth="710.0">
+                                            <columns>
+                                              <TableColumn fx:id="colCedula" prefWidth="140.00000303983688" text="Cedula" />
+                                              <TableColumn fx:id="colNombre" prefWidth="125.59996032714844" text="Nombre" />
+                                                <TableColumn fx:id="colTelefono" prefWidth="112.800048828125" text="Télefono" />
+                                                <TableColumn fx:id="colCorreo" prefWidth="108.0" text="Correo" />
+                                                <TableColumn fx:id="colPlan" prefWidth="123.99993896484375" text="Plan" />
+                                                <TableColumn fx:id="colEstado" prefWidth="95.2000732421875" text="Estado" />
+                                            </columns>
+                                             <VBox.margin>
+                                                <Insets top="50.0" />
+                                             </VBox.margin>
+                                          </TableView>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <Pane fx:id="tablaCliente" prefHeight="43.0" prefWidth="494.0" />
+                              <HBox prefHeight="322.0" prefWidth="1159.0" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="panelRutinas" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <VBox layoutY="14.0" prefHeight="95.0" prefWidth="428.0">
+                     <children>
+                        <HBox prefHeight="56.0" prefWidth="428.0">
+                           <children>
+                              <Pane prefHeight="56.0" prefWidth="25.0" />
+                              <Label fx:id="lblTitulo" text="Gestión de rutinas">
+                                 <font>
+                                    <Font name="System Bold" size="33.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <HBox layoutY="109.0" prefHeight="317.0" prefWidth="1190.0" spacing="40.0">
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" />
+                     </padding>
+                     <children>
+                        <VBox prefHeight="284.0" prefWidth="1151.0">
+                           <children>
+                              <HBox prefHeight="252.0" prefWidth="949.0" spacing="15.0">
+                                 <children>
+                                    <VBox fx:id="boxBasico" prefHeight="240.0" prefWidth="504.0" spacing="5.0" style="-fx-background-radius: 10; -fx-background-color: white; -fx-padding: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1),8,0,0,3);">
+                                       <children>
+                                          <VBox prefHeight="175.0" prefWidth="474.0">
+                                             <children>
+                                                <Label alignment="BOTTOM_CENTER" prefHeight="22.0" prefWidth="137.0" text="Nombre de rutina">
+                                                   <font>
+                                                      <Font size="15.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="txtNombreRutina" prefHeight="42.0" prefWidth="376.0" style="-fx-background-color: white; -fx-background-radius: 6; -fx-border-radius: 6; -fx-border-color: #dcdfe6; -fx-border-width: 1; -fx-padding: 6 10 6 10;">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </TextField>
+                                                <HBox prefHeight="18.0" prefWidth="474.0">
+                                                   <children>
+                                                      <Label alignment="BOTTOM_CENTER" prefHeight="22.0" prefWidth="70.0" text="Nivel">
+                                                         <font>
+                                                            <Font size="15.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label alignment="BOTTOM_CENTER" prefHeight="22.0" prefWidth="70.0" text="Tipo">
+                                                         <font>
+                                                            <Font size="15.0" />
+                                                         </font>
+                                                         <HBox.margin>
+                                                            <Insets left="160.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                   </children>
+                                                   <VBox.margin>
+                                                      <Insets top="20.0" />
+                                                   </VBox.margin>
+                                                </HBox>
+                                                <HBox prefHeight="100.0" prefWidth="200.0">
+                                                   <children>
+                                                      <ComboBox fx:id="comboNivel" prefHeight="38.0" prefWidth="202.0" style="-fx-background-color: transparent; -fx-border-color: #dcdfe6; -fx-background-radius: 6; -fx-border-radius: 6; -fx-border-width: 1;" />
+                                                      <ComboBox fx:id="comboTipo" prefHeight="38.0" prefWidth="202.0" style="-fx-background-color: transparent; -fx-border-color: #dcdfe6; -fx-background-radius: 6; -fx-border-radius: 6; -fx-border-width: 1;">
+                                                         <HBox.margin>
+                                                            <Insets left="30.0" />
+                                                         </HBox.margin>
+                                                      </ComboBox>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                          <HBox prefHeight="58.0" prefWidth="474.0">
+                                             <children>
+                                                <JFXButton fx:id="botonRegistrarRutina" onAction="#registrarRutina" prefHeight="39.0" prefWidth="250.0" style="-fx-background-color: #0a3059; -fx-background-radius: 20;" text="Registrar rutina" textFill="WHITE">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                </JFXButton>
+                                                <JFXButton fx:id="botonActualizarRutina" onAction="#ActualizarRutina" prefHeight="39.0" prefWidth="250.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-border-color: #dcdfe6; -fx-border-radius: 20;" text="Actualizar rutina">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets left="15.0" />
+                                                   </HBox.margin>
+                                                </JFXButton>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                    <VBox fx:id="boxBasico2" prefHeight="240.0" prefWidth="504.0" spacing="5.0" style="-fx-background-radius: 10; -fx-background-color: white; -fx-padding: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1),8,0,0,3);">
+                                       <children>
+                                          <VBox prefHeight="174.0" prefWidth="474.0">
+                                             <children>
+                                                <Label alignment="BOTTOM_CENTER" prefHeight="22.0" prefWidth="92.0" text="Descripción">
+                                                   <font>
+                                                      <Font size="15.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="txtObjetivo" prefHeight="42.0" prefWidth="376.0" style="-fx-background-color: white; -fx-background-radius: 6; -fx-border-radius: 6; -fx-border-color: #dcdfe6; -fx-border-width: 1; -fx-padding: 6 10 6 10;">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </TextField>
+                                                <HBox prefHeight="18.0" prefWidth="474.0">
+                                                   <children>
+                                                      <Label alignment="BOTTOM_CENTER" prefHeight="22.0" prefWidth="70.0" text="Duración">
+                                                         <font>
+                                                            <Font size="15.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label alignment="BOTTOM_CENTER" prefHeight="22.0" prefWidth="70.0" text="Cliente">
+                                                         <font>
+                                                            <Font size="15.0" />
+                                                         </font>
+                                                         <HBox.margin>
+                                                            <Insets left="160.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                   </children>
+                                                   <VBox.margin>
+                                                      <Insets top="20.0" />
+                                                   </VBox.margin>
+                                                </HBox>
+                                                <HBox prefHeight="100.0" prefWidth="200.0">
+                                                   <children>
+                                                      <ComboBox fx:id="comboDuracion" prefHeight="38.0" prefWidth="202.0" style="-fx-background-color: transparent; -fx-border-color: #dcdfe6; -fx-background-radius: 6; -fx-border-radius: 6; -fx-border-width: 1;" />
+                                                      <ComboBox fx:id="comboCliente" prefHeight="38.0" prefWidth="202.0" style="-fx-background-color: transparent; -fx-border-color: #dcdfe6; -fx-background-radius: 6; -fx-border-radius: 6; -fx-border-width: 1;">
+                                                         <HBox.margin>
+                                                            <Insets left="30.0" />
+                                                         </HBox.margin>
+                                                      </ComboBox>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                          <HBox prefHeight="58.0" prefWidth="474.0">
+                                             <children>
+                                                <JFXButton fx:id="botonEliminarRutina" onAction="#EliminarRutina" prefHeight="39.0" prefWidth="250.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-border-color: #dcdfe6; -fx-border-radius: 20;" text="Eliminar rutina">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets left="15.0" />
+                                                   </HBox.margin>
+                                                </JFXButton>
+                                                <JFXButton fx:id="botonLimpiar" onAction="#limpiar" prefHeight="39.0" prefWidth="250.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-border-color: #dcdfe6; -fx-border-radius: 20;" text="Limpiar">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets left="15.0" />
+                                                   </HBox.margin>
+                                                </JFXButton>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <Pane prefHeight="18.0" prefWidth="1151.0" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <VBox fx:id="boxBasico21" layoutX="24.0" layoutY="438.0" prefHeight="323.0" prefWidth="1018.0" spacing="5.0" style="-fx-background-radius: 10; -fx-background-color: white; -fx-padding: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1),8,0,0,3);">
+                     <children>
+                        <Label fx:id="lblTitulo1" text="Rutinas registradas">
+                           <font>
+                              <Font name="System Bold" size="25.0" />
+                           </font>
+                        </Label>
+                        <TableView fx:id="tablaRutinasAsignadas" prefHeight="219.0" prefWidth="967.0">
+                          <columns>
+                            <TableColumn fx:id="colNombreRutina" prefWidth="263.2000366449356" text="Nombre" />
+                            <TableColumn fx:id="colDescripcion" prefWidth="386.3999938964844" text="Descripción" />
+                              <TableColumn fx:id="colClienteRutina" prefWidth="316.00006103515625" text="Cliente" />
+                          </columns>
+                           <VBox.margin>
+                              <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
+                           </VBox.margin>
+                        </TableView>
+                     </children>
+                  </VBox>
+               </children></AnchorPane>
+         </children>
+      </StackPane>
+   </center>
+</BorderPane>

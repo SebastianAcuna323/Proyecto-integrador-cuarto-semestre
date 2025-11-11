@@ -87,24 +87,6 @@
                   </ImageView>
                </graphic>
             </JFXToggleNode>
-            <JFXToggleNode fx:id="botonPago" onAction="#mostrarPago" prefHeight="58.0" prefWidth="288.0" style="-fx-background-color: transparent;" text="   PAGOS Y PLANES" textFill="WHITE" toggleGroup="$menuDash">
-               <selectedColor>
-                  <Color red="0.557894766330719" green="0.5454970598220825" blue="0.5454970598220825" opacity="0.20000000298023224" />
-               </selectedColor>
-               <font>
-                  <Font name="System Bold" size="23.0" />
-               </font>
-               <VBox.margin>
-                  <Insets left="35.0" top="30.0" />
-               </VBox.margin>
-               <graphic>
-                  <ImageView fitHeight="40.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/card.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </JFXToggleNode>
             <JFXToggleNode fx:id="botonAsistencia" onAction="#mostrarAsistencia" prefHeight="58.0" prefWidth="288.0" style="-fx-background-color: transparent;" text="   ASISTENCIAS" textFill="WHITE" toggleGroup="$menuDash">
                <selectedColor>
                   <Color red="0.557894766330719" green="0.5454970598220825" blue="0.5454970598220825" opacity="0.20000000298023224" />
@@ -141,6 +123,17 @@
                   </ImageView>
                </graphic>
             </JFXToggleNode>
+            <JFXToggleNode fx:id="botonPago" onAction="#mostrarPago" prefHeight="58.0" prefWidth="288.0" style="-fx-background-color: transparent;" textFill="WHITE" toggleGroup="$menuDash">
+               <selectedColor>
+                  <Color red="0.557894766330719" green="0.5454970598220825" blue="0.5454970598220825" opacity="0.20000000298023224" />
+               </selectedColor>
+               <font>
+                  <Font name="System Bold" size="23.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="35.0" top="30.0" />
+               </VBox.margin>
+            </JFXToggleNode>
             <JFXToggleNode fx:id="botonCerrarSesion" onAction="#mostrarCerrarSesion" prefHeight="58.0" prefWidth="288.0" style="-fx-background-color: transparent;" text="   CERRAR SESION" textFill="WHITE">
                <toggleGroup>
                   <ToggleGroup fx:id="menuDash111" />
@@ -168,7 +161,7 @@
    <center>
       <StackPane BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane fx:id="panelInicio" prefHeight="200.0" prefWidth="200.0">
+            <AnchorPane fx:id="panelInicio" prefHeight="200.0" prefWidth="200.0" visible="false">
                <children>
                   <VBox layoutX="6.0" layoutY="7.0" prefHeight="988.0" prefWidth="1193.0" spacing="20.0" style="-fx-background-color: #f4f6f9;">
                      <padding>
@@ -330,7 +323,7 @@
                      </children>
                   </VBox>
                </children></AnchorPane>
-            <AnchorPane fx:id="panelRutinas" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" visible="false">
+            <AnchorPane fx:id="panelRutinas" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0">
                <children>
                   <VBox layoutY="14.0" prefHeight="95.0" prefWidth="428.0">
                      <children>
@@ -369,7 +362,7 @@
                                                       <Font name="System Bold" size="23.0" />
                                                    </font>
                                                 </Label>
-                                                <Label fx:id="lblPlan" text="Plan">
+                                                <Label fx:id="lblPlanRutinas" text="Plan">
                                                    <HBox.margin>
                                                       <Insets left="30.0" top="8.0" />
                                                    </HBox.margin>
@@ -389,7 +382,7 @@
                                                       <Insets top="20.0" />
                                                    </HBox.margin>
                                                 </Label>
-                                                <Label fx:id="lblEntrenador" text="Entrenador asignado">
+                                                <Label fx:id="lblEntrenadorRutinas" text="Entrenador asignado">
                                                    <HBox.margin>
                                                       <Insets left="27.0" top="24.0" />
                                                    </HBox.margin>
@@ -440,7 +433,7 @@
                                                       <Insets left="20.0" />
                                                    </HBox.margin>
                                                 </JFXComboBox>
-                                                <JFXButton fx:id="botonVerRutina" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: #0a3059; -fx-background-radius: 20;" text="Ver" textFill="WHITE">
+                                                <JFXButton fx:id="botonVerRutina" onAction="#verRutina" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: #0a3059; -fx-background-radius: 20;" text="Ver" textFill="WHITE">
                                                    <HBox.margin>
                                                       <Insets left="20.0" />
                                                    </HBox.margin>

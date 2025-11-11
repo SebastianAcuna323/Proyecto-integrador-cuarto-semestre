@@ -32,7 +32,7 @@ public class Usuario {
         this.idEstado = 1; // Estado por defecto: activo
     }
 
-    // 🔹 Constructor usado por el Administrador (al listar usuarios desde la BD)
+    // Constructor usado por el Administrador (al listar usuarios desde la BD)
     public Usuario(String cedula, String nombre, String apellido, String correo,
                    String contrasena, String nombreRol, String nombreEstado) {
         this.cedula = cedula;

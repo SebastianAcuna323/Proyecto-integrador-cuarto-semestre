@@ -8,19 +8,22 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import model.AsistenciaRecienteModuloRecepcionista;
-import model.ClienteRecepcionista;
-import model.ConexionDatabase;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import javafx.stage.Stage;
+import model.*;
+import utils.paths;
+import java.io.IOException;
+import java.sql.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Optional;
 
 public class RecepcionistaController {
 
@@ -88,7 +91,7 @@ public class RecepcionistaController {
     private TableColumn<ClienteRecepcionista, String> colCedula;
 
     @FXML
-    private TableColumn<?, ?> colCliente;
+    private TableColumn<AsistenciaRegistrar, String> colCliente;
 
 
     @FXML
@@ -102,13 +105,13 @@ public class RecepcionistaController {
     private TableColumn<ClienteRecepcionista, String> colEstado;
 
     @FXML
-    private TableColumn<?, ?> colFecha;
+    private TableColumn<AsistenciaRegistrar, LocalDate> colFecha;
 
     @FXML
     private TableColumn<?, ?> colFechaPago;
 
     @FXML
-    private TableColumn<?, ?> colHora;
+    private TableColumn<AsistenciaRegistrar, LocalTime> colHora;
 
 
     @FXML
@@ -123,6 +126,11 @@ public class RecepcionistaController {
     @FXML
     private TableColumn<ClienteRecepcionista, String> colPlan;
 
+    @FXML
+    private TableColumn<AsistenciaRegistrar, String> colPlanAsistencias;
+
+    @FXML
+    private TableColumn<AsistenciaRegistrar, String> colEstadoAsistencias;
 
     @FXML
     private TableColumn<?, ?> colPlanPagos;
@@ -197,7 +205,7 @@ public class RecepcionistaController {
     private AnchorPane panelPagos;
 
     @FXML
-    private TableView<?> tablaAsistencias;
+    private TableView<AsistenciaRegistrar> tablaAsistencias;
 
     @FXML
     private Pane tablaCliente;
@@ -265,35 +273,7 @@ public class RecepcionistaController {
     @FXML
     private TextField txtTelefono;
 
-    @FXML
-    void actualizarCliente(ActionEvent event) {
-
-    }
-
-    @FXML
-    void buscarAsistencia(ActionEvent event) {
-
-    }
-
-
-    @FXML
-    void eliminarCliente(ActionEvent event) {
-
-    }
-
-
-
-
-    @FXML
-    void mostrarCerrarSesion(ActionEvent event) {
-
-    }
-
-
-    @FXML
-    void registrarAsistencia(ActionEvent event) {
-
-    }
+    private int idCliente;
 
 
     @FXML
@@ -310,7 +290,16 @@ public class RecepcionistaController {
         cargarClientesActivos();
         cargarPagosPendientes();
         cargarNuevosClientes();
+
         inicializarModuloClientes();
+
+        configurarTablaAsistencia();
+        lblHoraActual.setText(LocalTime.now().withNano(0).toString());
+        cargarAsistenciasDelDia();
+        actualizarTotales();
+
+
+
     }
 
     private void mostrarAlerta(Alert.AlertType tipo, String titulo, String encabezado, String contenido) {
@@ -319,6 +308,203 @@ public class RecepcionistaController {
         alerta.setHeaderText(encabezado);
         alerta.setContentText(contenido);
         alerta.showAndWait();
+    }
+
+    private void mostrarAlertaa(String titulo, String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(titulo);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
+    }
+
+
+    //--------------------------------------METODOS DEL MODULO ASISTENCIAS DEL RECEPCIONISTA-----------------------------------------
+    private void configurarTablaAsistencia() {
+        colCliente.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getCliente()));
+        colFecha.setCellValueFactory(data -> new javafx.beans.property.SimpleObjectProperty<>(data.getValue().getFecha()));
+        colHora.setCellValueFactory(data -> new javafx.beans.property.SimpleObjectProperty<>(data.getValue().getHora()));
+        colPlanAsistencias.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getPlan()));
+        colEstadoAsistencias.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getEstado()));
+    }
+
+    @FXML
+    void buscarAsistencia(ActionEvent event) {
+        String cedula = txtCedulaCliente.getText().trim();
+
+        if (cedula.isEmpty()) {
+            mostrarAlerta(Alert.AlertType.WARNING, "Advertencia", "Campo vacío", "Por favor ingresa una cédula para buscar al cliente.");
+            return;
+        }
+
+        String sql = """
+        SELECT 
+            c.id_cliente,
+            CONCAT(u.nombre, ' ', u.apellido) AS nombre_completo,
+            t.nombre AS plan
+        FROM Cliente c
+        JOIN Usuario u ON c.id_cliente = u.id_usuario
+        JOIN TipoPlan t ON c.id_tipo_plan = t.id_tipo_plan
+        WHERE u.cedula = ?
+    """;
+
+        try (Connection con = ConexionDatabase.getConnection();
+             PreparedStatement pst = con.prepareStatement(sql)) {
+
+            pst.setString(1, cedula);
+            try (ResultSet rs = pst.executeQuery()) {
+                if (rs.next()) {
+                    int idCliente = rs.getInt("id_cliente");
+                    String nombre = rs.getString("nombre_completo");
+                    String plan = rs.getString("plan");
+
+                    // Mostramos los datos del cliente
+                    lblNombreCliente.setText(nombre);
+                    lblTituloRutinas.setText("Plan: " + plan);
+
+                    // Guardamos el ID del cliente para el registro posterior
+                    txtCedulaCliente.setUserData(idCliente);
+
+                    mostrarAlerta(Alert.AlertType.INFORMATION, "Cliente encontrado", null,
+                            "Cliente: " + nombre + "\nPlan: " + plan);
+                } else {
+                    mostrarAlerta(Alert.AlertType.WARNING, "No encontrado", null,
+                            "No se encontró ningún cliente con esa cédula.");
+                    lblNombreCliente.setText("");
+                    lblTituloRutinas.setText("");
+                    txtCedulaCliente.setUserData(null);
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            mostrarAlerta(Alert.AlertType.ERROR, "Error", "Error al buscar cliente", e.getMessage());
+        }
+    }
+
+    @FXML
+    void registrarAsistencia(ActionEvent event) {
+  // Verificar que haya cédula en el campo
+        String cedula = txtCedulaCliente.getText().trim(); // usar el campo correcto de cédula
+        if (cedula.isEmpty()) {
+            mostrarAlertaa("Campo vacío", "Por favor ingresa la cédula del cliente antes de registrar la asistencia.");
+            return;
+        }
+
+        try (Connection conn = ConexionDatabase.getConnection()) {
+            // Buscar el ID del cliente a partir de la cédula
+            String sqlBuscarCliente = """
+            SELECT c.id_cliente 
+            FROM Cliente c
+            INNER JOIN Usuario u ON c.id_cliente = u.id_usuario
+            WHERE u.cedula = ?
+        """;
+
+            int idCliente = -1;
+            try (PreparedStatement stmt = conn.prepareStatement(sqlBuscarCliente)) {
+                stmt.setString(1, cedula); // ✅ sintaxis correcta
+                try (ResultSet rs = stmt.executeQuery()) {
+                    if (rs.next()) {
+                        idCliente = rs.getInt("id_cliente"); // ✅ sintaxis correcta
+                    }
+                }
+            }
+
+            if (idCliente == -1) {
+                mostrarAlertaa("Cliente no encontrado", "No se encontró un cliente registrado con esa cédula.");
+                return;
+            }
+
+            // Obtener la fecha del DatePicker o la actual si no se seleccionó
+            LocalDate fechaSeleccionada = dpFechaAsistencia.getValue() != null
+                    ? dpFechaAsistencia.getValue()
+                    : LocalDate.now();
+
+            java.sql.Date fechaSQL = java.sql.Date.valueOf(fechaSeleccionada);
+            java.sql.Time horaSQL = java.sql.Time.valueOf(LocalTime.now());
+
+            // Obtener el ID del recepcionista logueado
+            int idRecepcionista = UsuarioSesion.getIdUsuario();
+
+            // Insertar la asistencia
+            String sqlInsert = """
+            INSERT INTO Asistencia (fecha, hora, id_cliente, registrado_por)
+            VALUES (?, ?, ?, ?)
+        """;
+
+            try (PreparedStatement stmt = conn.prepareStatement(sqlInsert)) {
+                stmt.setDate(1, fechaSQL);
+                stmt.setTime(2, horaSQL);
+                stmt.setInt(3, idCliente);
+                stmt.setInt(4, idRecepcionista);
+                stmt.executeUpdate();
+            }
+
+            mostrarAlertaa("✅ Éxito", "Asistencia registrada correctamente.");
+
+            // Actualizar tabla y totales
+            cargarAsistenciasDelDia();
+            actualizarTotales();
+            limpiarCamposAsistencia();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            mostrarAlertaa("❌ Error", "No se pudo registrar la asistencia.\n" + e.getMessage());
+        }
+    }
+
+    private void limpiarCamposAsistencia() {
+        txtCedulaPago.clear();
+        dpFechaAsistencia.setValue(null);
+    }
+
+    private void cargarAsistenciasDelDia() {
+        ObservableList<AsistenciaRegistrar> lista = FXCollections.observableArrayList();
+
+        try (Connection conn = ConexionDatabase.getConnection()) {
+            String sql = """
+                    SELECT CONCAT(u.nombre, ' ', u.apellido) AS cliente, a.fecha, a.hora,
+                           t.nombre AS plan, e.descripcion AS estado
+                    FROM Asistencia a
+                    JOIN Cliente c ON a.id_cliente = c.id_cliente
+                    JOIN Usuario u ON c.id_cliente = u.id_usuario
+                    JOIN TipoPlan t ON c.id_tipo_plan = t.id_tipo_plan
+                    JOIN Estado e ON u.id_estado = e.id_estado
+                    WHERE a.fecha = CURDATE()
+                    ORDER BY a.hora ASC
+                    """;
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+                lista.add(new AsistenciaRegistrar(
+                        rs.getString("cliente"),
+                        rs.getDate("fecha").toLocalDate(),
+                        rs.getTime("hora").toLocalTime(),
+                        rs.getString("plan"),
+                        rs.getString("estado")
+                ));
+            }
+
+            tablaAsistencias.setItems(lista);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void actualizarTotales() {
+        try (Connection conn = ConexionDatabase.getConnection()) {
+            Statement st = conn.createStatement();
+
+            ResultSet rsDia = st.executeQuery("SELECT COUNT(*) FROM Asistencia WHERE fecha = CURDATE()");
+            if (rsDia.next()) lblAsistenciasHoy.setText(String.valueOf(rsDia.getInt(1)));
+
+            ResultSet rsSemana = st.executeQuery("SELECT COUNT(*) FROM Asistencia WHERE YEARWEEK(fecha, 1) = YEARWEEK(CURDATE(), 1)");
+            if (rsSemana.next()) lblAsistenciasSemana.setText(String.valueOf(rsSemana.getInt(1)));
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -339,18 +525,13 @@ public class RecepcionistaController {
         // ComboBox con tipos de plan
         comboPlan.getItems().addAll("Básico", "Premium");
 
-        // Asociar la lista con la tabla
         tablaClientes.setItems(listaClientes);
 
-        // Escuchar selección de la tabla
         tablaClientes.getSelectionModel().selectedItemProperty().addListener((obs, oldSel, newSel) -> {
             if (newSel != null) {
-                // Llenar campos inferiores (ejemplo: txtCedula, txtNombre, txtApellido, txtTelefono, txtCorreo, txtDireccion, comboPlan)
                 txtCedula.setText(newSel.getCedula());
-                // si tu UI tiene campos separados para nombre y apellido en lugar de nombreCompleto,
-                // divide newSel.getNombreCompleto() por espacio o mejor aún, lee nombre y apellido por separado en la consulta.
-                txtNombre.setText(newSel.getNombreCompleto()); // o separar si tienes campos separados
-                txtApellido.setText(""); // si no trajiste apellido por separado, opcional
+                txtNombre.setText(newSel.getNombreCompleto());
+                txtApellido.setText("");
 
                 txtTelefono.setText(newSel.getTelefono() != null ? newSel.getTelefono() : "");
                 txtCorreo.setText(newSel.getCorreo() != null ? newSel.getCorreo() : "");
@@ -362,7 +543,7 @@ public class RecepcionistaController {
                 txtNombre.setDisable(true);
                 txtApellido.setDisable(true);
 
-                // Guarda idUsuario en clienteSeleccionado para operaciones (update/delete/register)
+                // Guarda idUsuario en clienteSeleccionado para operaciones
                 clienteSeleccionado = newSel;
             }
         });
@@ -376,6 +557,104 @@ public class RecepcionistaController {
         txtDireccion.clear();
         txtCorreo.clear();
         comboPlan.setValue(null);
+    }
+
+    @FXML
+    void eliminarCliente(ActionEvent event) {
+        if (clienteSeleccionado == null) {
+            mostrarAlerta(Alert.AlertType.WARNING, "Advertencia", "Selecciona un cliente", "Debes seleccionar un cliente de la tabla para poder eliminarlo.");
+            return;
+        }
+
+        // Confirmación antes de eliminar
+        Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmacion.setTitle("Confirmar eliminación");
+        confirmacion.setHeaderText("¿Estás seguro de eliminar este cliente?");
+        confirmacion.setContentText("Esta acción no se puede deshacer.\n\nCliente: " + clienteSeleccionado.getNombreCompleto());
+
+        if (confirmacion.showAndWait().get() != ButtonType.OK) {
+            return; // Canceló
+        }
+
+        String sql = "DELETE FROM cliente WHERE id_cliente = ?";
+
+        try (Connection con = ConexionDatabase.getConnection();
+             PreparedStatement pst = con.prepareStatement(sql)) {
+
+            pst.setInt(1, clienteSeleccionado.getIdUsuario());
+            int filas = pst.executeUpdate();
+
+            if (filas > 0) {
+                mostrarAlerta(Alert.AlertType.INFORMATION, "Éxito", "Cliente eliminado", "El cliente fue eliminado correctamente.");
+                listaClientes.remove(clienteSeleccionado);
+                limpiarCampos(null);
+            } else {
+                mostrarAlerta(Alert.AlertType.WARNING, "Advertencia", "No se encontró el cliente", "El cliente no existe o ya fue eliminado.");
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            mostrarAlerta(Alert.AlertType.ERROR, "Error SQL", "No se pudo eliminar el cliente", ex.getMessage());
+        }
+    }
+
+    @FXML
+    void actualizarCliente(ActionEvent event) {
+        if (clienteSeleccionado == null) {
+            mostrarAlerta(Alert.AlertType.WARNING, "Advertencia", "Selecciona un cliente", "Primero selecciona un cliente en la tabla para actualizar sus datos.");
+            return;
+        }
+
+        String telefono = txtTelefono.getText().trim();
+        String direccion = txtDireccion.getText().trim();
+        String planSeleccionado = comboPlan.getValue();
+
+        if (telefono.isEmpty() || direccion.isEmpty() || planSeleccionado == null) {
+            mostrarAlerta(Alert.AlertType.WARNING, "Campos incompletos", "Faltan datos por llenar", "Debes llenar todos los campos: teléfono, dirección y tipo de plan.");
+            return;
+        }
+
+        String sqlTipoPlan = "SELECT id_tipo_plan FROM tipoplan WHERE nombre = ?";
+        int idTipoPlan = -1;
+
+        try (Connection con = ConexionDatabase.getConnection();
+             PreparedStatement pstPlan = con.prepareStatement(sqlTipoPlan)) {
+
+            pstPlan.setString(1, planSeleccionado);
+            try (ResultSet rs = pstPlan.executeQuery()) {
+                if (rs.next()) {
+                    idTipoPlan = rs.getInt("id_tipo_plan");
+                } else {
+                    mostrarAlerta(Alert.AlertType.ERROR, "Error", "Plan no encontrado", "El tipo de plan seleccionado no existe en la base de datos.");
+                    return;
+                }
+            }
+
+            String updateSQL = """
+            UPDATE cliente
+            SET telefono = ?, direccion = ?, id_tipo_plan = ?
+            WHERE id_cliente = ?
+        """;
+
+            try (PreparedStatement pstUpdate = con.prepareStatement(updateSQL)) {
+                pstUpdate.setString(1, telefono);
+                pstUpdate.setString(2, direccion);
+                pstUpdate.setInt(3, idTipoPlan);
+                pstUpdate.setInt(4, clienteSeleccionado.getIdUsuario());
+
+                int filas = pstUpdate.executeUpdate();
+                if (filas > 0) {
+                    mostrarAlerta(Alert.AlertType.INFORMATION, "Éxito", "Cliente actualizado", "Los datos del cliente se actualizaron correctamente.");
+                    buscarCliente(null); // 🔄 Refrescar tabla
+                } else {
+                    mostrarAlerta(Alert.AlertType.WARNING, "Sin cambios", "No se actualizó ningún registro", "Verifica que el cliente exista en la tabla de clientes.");
+                }
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            mostrarAlerta(Alert.AlertType.ERROR, "Error SQL", "No se pudo actualizar el cliente", ex.getMessage());
+        }
     }
 
     @FXML
@@ -424,8 +703,7 @@ public class RecepcionistaController {
                 int filas = pstInsert.executeUpdate();
                 if (filas > 0) {
                     mostrarAlerta(Alert.AlertType.INFORMATION, "Éxito", "Cliente registrado", "El cliente fue registrado correctamente con fecha de matrícula actual.");
-                    buscarCliente(null); // 🔄 Refresca la tabla
-                    //limpiarCamposRegistro(); // 🧹 Limpia los campos
+                    buscarCliente(null);
                 }
             }
 
@@ -646,6 +924,41 @@ public class RecepcionistaController {
         hideAll();
         panelClientes.setVisible(true);
 
+    }
+
+    @FXML
+    void mostrarCerrarSesion(ActionEvent event) {
+
+        // Mostrar alerta de confirmación
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmar cierre de sesión");
+        alert.setHeaderText(null);
+        alert.setContentText("¿Está seguro de que desea cerrar sesión?");
+
+        Optional<ButtonType> resultado = alert.showAndWait();
+
+        if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
+            try {
+                // Cargar la ventana de Login.fxml
+                FXMLLoader loader = new FXMLLoader(getClass().getResource(paths.SCENEPRUEBALOGIN));
+                Parent root = loader.load();
+
+                Stage loginStage = new Stage();
+                loginStage.setScene(new Scene(root));
+                loginStage.setTitle("Iniciar sesión");
+                loginStage.show();
+
+                // Cerrar la ventana actual
+                Stage stageActual = (Stage) botonCerrarSesion.getScene().getWindow();
+                stageActual.close();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            // Si cancela, regresa el toggle a su estado original
+            botonCerrarSesion.setSelected(false);
+        }
     }
 
 }

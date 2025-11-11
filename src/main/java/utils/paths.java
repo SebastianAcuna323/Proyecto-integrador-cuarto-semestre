@@ -10,4 +10,5 @@ public class paths {
     public static String EDITARUSUARIO = "../editarUsuario.fxml";
     public static String CLIENTE = "../cliente.fxml";
     public static String RECEPCIONISTA = "../recepcionista.fxml";
+    public static String ENTRENADOR = "../entrenador.fxml";
 }

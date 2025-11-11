@@ -4,11 +4,11 @@ public class ClienteRecepcionista {
     private int idUsuario;
     private String cedula;
     private String nombreCompleto;
-    private String telefono;   // desde Cliente (puede ser null)
-    private String correo;     // desde Usuario
-    private String direccion;  // desde Cliente (puede ser null)
-    private String plan;       // desde TipoPlan (puede ser null)
-    private String estado;     // desde Estado (puede ser null)
+    private String telefono;
+    private String correo;
+    private String direccion;
+    private String plan;
+    private String estado;
 
     public ClienteRecepcionista(int idUsuario, String cedula, String nombreCompleto,
                                 String telefono, String correo, String direccion, String plan, String estado) {

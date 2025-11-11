@@ -19,21 +19,18 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import model.AsistenciaModuloCliente;
-import model.ConexionDatabase;
-import model.PagoModuloCliente;
-import model.UsuarioSesion;
+import model.*;
 import utils.paths;
-
 import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.Map;
 import java.util.Optional;
 
 public class ClienteController {
 
     @FXML
-    private JFXComboBox<?> ComboRutina;
+    private JFXComboBox<String> ComboRutina;
 
     @FXML
     private JFXToggleNode botonAsistencia;
@@ -96,25 +93,24 @@ public class ClienteController {
     private NumberAxis cantidadAsistencias;
 
     @FXML
-    private TableColumn<?, ?> colDescanso;
-
+    private TableColumn<Map<String, Object>, String> colEjercicio;
     @FXML
-    private TableColumn<?, ?> colEjercicio;
+    private TableColumn<Map<String, Object>, Integer> colSerie;
+    @FXML
+    private TableColumn<Map<String, Object>, Integer> colRepeticiones;
+    @FXML
+    private TableColumn<Map<String, Object>, String> colPesoRecomendado;
+    @FXML
+    private TableColumn<Map<String, Object>, String> colDescanso;
 
     @FXML
     private TableColumn<?, ?> colMonto;
 
-    @FXML
-    private TableColumn<?, ?> colPesoRecomendado;
+
 
     @FXML
     private TableColumn<?, ?> colPlan;
 
-    @FXML
-    private TableColumn<?, ?> colRepeticiones;
-
-    @FXML
-    private TableColumn<?, ?> colSerie;
 
     @FXML
     private ComboBox<String> comboMetodoPago;
@@ -157,6 +153,12 @@ public class ClienteController {
 
     @FXML
     private Label lblBienvenida;
+
+    @FXML
+    private Label lblPlanRutinas;
+
+    @FXML
+    private Label lblEntrenadorRutinas;
 
     @FXML
     private Label lblBienvenida1;
@@ -252,7 +254,7 @@ public class ClienteController {
     private TableColumn<AsistenciaModuloCliente, String> colHora;
 
     @FXML
-    private TableView<?> tablaEjercicios;
+    private TableView<Map<String, Object>> tablaEjercicios;
 
     @FXML
     private TableView<PagoModuloCliente> tablaPagos;
@@ -280,6 +282,11 @@ public class ClienteController {
 
     @FXML
     void pagarAhora(ActionEvent event) {
+
+    }
+
+    @FXML
+    void verRutina(ActionEvent event) {
 
     }
 
@@ -319,12 +326,13 @@ public class ClienteController {
         cargarHistorialPagos();
         configurarComboMetodoPago();
         configurarTablaHistorialPagos();
+
     }
 
     //--------------------------------METODOS DEL MODULO DE PAGOS DEL CLIENTE------------------------------------
-    /**
-     * Configura las columnas de la tabla de historial de pagos
-     */
+
+     //Configura las columnas de la tabla de historial de pagos
+
     private void configurarTablaHistorialPagos() {
         // Verificar que las columnas existan en tu FXML con estos fx:id
         colFecha.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("fecha"));
@@ -332,9 +340,9 @@ public class ClienteController {
         colMonto.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("monto"));
         colEstado.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("estado"));
     }
-/**
-    * Carga el plan actual del cliente
- */
+
+    //Carga el plan actual del cliente
+
     private void cargarPlanActual() {
         String sql = """
         SELECT t.nombre 
@@ -361,9 +369,9 @@ public class ClienteController {
         }
     }
 
-    /**
-     * Carga el historial de pagos del cliente en la tabla
-     */
+
+     //Carga el historial de pagos del cliente en la tabla
+
     private void cargarHistorialPagos() {
         tablaPagos.getItems().clear();
 
@@ -503,8 +511,6 @@ public class ClienteController {
     }
 
 
-
-
     //--------------------------------METODOS DEL MODULO DE CONFIGURACIÓN DEL CLIENTE------------------------------------
 
      //Carga todos los datos del cliente en el panel de configuración
@@ -566,9 +572,9 @@ public class ClienteController {
         }
     }
 
-    /**
-     * Configura el campo de cédula para que no sea editable
-     */
+
+      //Configura el campo de cédula para que no sea editable
+
     private void configurarCamposCedula() {
         txtCedula.setEditable(false);
         txtCedula.setStyle("-fx-background-color: #f0f0f0; -fx-opacity: 0.7;");
@@ -626,7 +632,6 @@ public class ClienteController {
                 conn.rollback();
                 throw e;
             } finally {
-                // Restaurar auto-commit
                 conn.setAutoCommit(true);
             }
 
@@ -881,8 +886,51 @@ public class ClienteController {
         }
     }
 
+    //----------------------------------------------METODOS MIS RUTINAS-----------------------------------------
 
+   /* private Cliente clienteModel = new Cliente();
+    *
 
+    // 🔹 Inicializa la vista del cliente
+    public void inicializarCliente(int idCliente) {
+        this.idCliente = idCliente;
+
+        // Llenar datos del plan actual
+        Map<String, String> planData = clienteModel.obtenerPlanYEntrenador(idCliente);
+        lblPlanRutinas.setText(planData.getOrDefault("plan", "Sin plan asignado"));
+        lblEntrenadorRutinas.setText(planData.getOrDefault("entrenador", "Entrenador no asignado"));
+        lblDuracion.setText(planData.getOrDefault("duracion", "N/A"));
+
+        // Cargar rutinas en el ComboBox
+        List<String> rutinas = clienteModel.obtenerRutinas(idCliente);
+        ComboRutina.getItems().setAll(rutinas);
+
+        // Configurar columnas de la tabla
+        colEjercicio.setCellValueFactory(cellData ->
+                new javafx.beans.property.SimpleStringProperty((String) cellData.getValue().get("ejercicio")));
+        colSerie.setCellValueFactory(cellData ->
+                new javafx.beans.property.SimpleIntegerProperty((Integer) cellData.getValue().get("series")).asObject());
+        colRepeticiones.setCellValueFactory(cellData ->
+                new javafx.beans.property.SimpleIntegerProperty((Integer) cellData.getValue().get("repeticiones")).asObject());
+        colPesoRecomendado.setCellValueFactory(cellData ->
+                new javafx.beans.property.SimpleStringProperty((String) cellData.getValue().get("peso_recomendado")));
+        colDescanso.setCellValueFactory(cellData ->
+                new javafx.beans.property.SimpleStringProperty((String) cellData.getValue().get("descanso")));
+    }
+
+    // 🔹 Botón "Ver" para mostrar ejercicios
+    @FXML
+    private void verRutina() {
+        String rutinaSeleccionada = ComboRutina.getValue();
+        if (rutinaSeleccionada == null || rutinaSeleccionada.isEmpty()) {
+            new Alert(Alert.AlertType.WARNING, "Por favor, selecciona una rutina.").show();
+            return;
+        }
+
+        List<Map<String, Object>> ejercicios = clienteModel.obtenerEjerciciosPorRutina(rutinaSeleccionada);
+        tablaEjercicios.setItems(FXCollections.observableArrayList(ejercicios));
+    }
+*/
     //----------------------------------------------METODOS DEL MODULO DE INICIO DEL CLIENTE-----------------------------------------
         //Metodo para que al cliente le salga su tipo de plan en el inicio
     private void cargarPlan() {
